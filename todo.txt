@@ -1,9 +1,0 @@
-0. store secrets in gitignore
-1. initial react site
-2. add mapbox
-3. add buttons / react frontend integration
-4. python backend integration
-5. project webapp / site url demo
-6. readme
-7. lock files
-8. tests / buildkite
