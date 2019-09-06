@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-  - lts/*
+node_js: lts/*
 cache:
   npm: false
-script: npm start
+script: npm run build
