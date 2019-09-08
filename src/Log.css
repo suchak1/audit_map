@@ -1,8 +1,37 @@
 .log {
-  display: flex;
-  flex-direction: column;
   height: 25vh;
-  flex: 1;
   background-color: #191A1A;
   color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cursor {
+  background-color: inherit;
+	position: relative;
+}
+.cursor	i {
+  background-color: inherit;
+	position: absolute;
+	width: 1px;
+	height: 80%;
+	left: 5px;
+	top: 10%;
+	animation-name: blink;
+	animation-duration: 800ms;
+	animation-iteration-count: infinite;
+	opacity: 1;
+}
+
+.cursor input:focus + i {
+  background-color: inherit;
+	display: none;
+}
+
+@keyframes blink {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
