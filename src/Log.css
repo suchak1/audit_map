@@ -1,0 +1,8 @@
+.log {
+  display: flex;
+  flex-direction: column;
+  height: 25vh;
+  flex: 1;
+  background-color: #191A1A;
+  color: white;
+}
