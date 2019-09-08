@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import ReactMapGL, {NavigationControl} from 'react-map-gl';
 
+const width = window.innerWidth;
+const height = window.innerHeight;
+const winSize = width * height;
+const zoom = winSize < 260000 ?  0 : (winSize < 580000 ? 0.5: 1);
+console.log(zoom)
+
 class Map extends Component {
   state = {
     viewport: {
-      zoom: 1
+      zoom: zoom
     }
   };
 
