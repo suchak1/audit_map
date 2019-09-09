@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './Log.css';
-// console.log(styles.log);
 
 const lines = [
   "POLICY.ACCESSED => POLICY.REVOKED",

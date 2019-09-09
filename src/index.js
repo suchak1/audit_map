@@ -5,6 +5,8 @@ import Map from './Map';
 import Log from './Log';
 import * as serviceWorker from './serviceWorker';
 require('dotenv').config();
+require("typeface-ubuntu-mono");
+
 
 ReactDOM.render(<><Map /><Log /></>, document.getElementById('root'));
 
