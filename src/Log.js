@@ -1,4 +1,9 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import VirtualizedList from './VirtualizedList';
 import './Log.css';
 
 const lines = [
@@ -27,6 +32,9 @@ class Log extends Component {
           <hr className="hr"></hr>
           <div className="text">Logs...</div>
           <div className="text">hey</div>
+          <VirtualizedList>
+          Hello world
+          </VirtualizedList>
         </div>
     );
   }

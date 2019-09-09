@@ -40,23 +40,16 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /.(js|jsx)$/,
-				include: [path.resolve(__dirname, 'src')],
-				loader: 'babel-loader',
-
-				options: {
-					plugins: ['syntax-dynamic-import'],
-
-					presets: [
-						[
-							'@babel/preset-env',
-							{
-								modules: false
-							}
-						]
-					]
-				}
-			}
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+			{
+	      test: /\.css$/,
+	      use: ['style-loader', 'css-loader']
+	    }
 		]
 	},
 
