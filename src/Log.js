@@ -10,7 +10,7 @@ class Log extends Component {
     return (
         <div className="log">
           <div className="header">
-            <span>
+            <span style={{color: "#4481F8"}}>
               <b>Audit Map</b>
             </span>
             <span> | </span>
@@ -18,12 +18,9 @@ class Log extends Component {
               an entry for the Virtru Privacy Engineering Challenge
             </span>
           </div>
-          <hr></hr>
-          Logs...
-          <div class="cursor">
-            <input type="text" class="rq-form-element" />
-              <i></i>
-          </div>
+          <hr className="hr"></hr>
+          <div className="text">Logs...</div>
+          <div className="text">hey</div>
         </div>
     );
   }

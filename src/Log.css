@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+.hr {
+  border: 1px solid #343332;
+}
 .log {
-  height: 25vh;
+  height: 24vh;
   background-color: #191A1A;
   color: white;
+  border: 1px solid #343332;
 }
 
 .header {
@@ -9,29 +15,48 @@
   justify-content: space-evenly;
 }
 
-.cursor {
-  background-color: inherit;
-	position: relative;
-}
-.cursor	i {
-  background-color: inherit;
-	position: absolute;
-	width: 1px;
-	height: 80%;
-	left: 5px;
-	top: 10%;
-	animation-name: blink;
-	animation-duration: 800ms;
-	animation-iteration-count: infinite;
-	opacity: 1;
+/* body and .text are NOT required for the blinking cursor. */
+body { background: black }
+
+.text {
+  position: relative;
+  display: inline-block;
+  font-family: 'Ubuntu Mono', Courier, serif;
+  line-height: 24px;
+  min-width: 10px;
 }
 
-.cursor input:focus + i {
-  background-color: inherit;
-	display: none;
+.text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -15px;
+  /* Remove display: inline-block if not required to be on the same line as text etc */
+  display: inline-block;
+  background-color: #606060;
+  vertical-align: top;
+  width: 10px;
+  /* Set height to the line height of .text */
+  height: 24px;
+  /*
+  Animation paramaters:
+  blink = animation-name,
+  1s = animation-duration,
+  step-end = animation-timing-function,
+  infinite = animation-iteration-count
+  */
+  -webkit-animation: blink 1s step-end infinite;
+  animation: blink 1s step-end infinite;
+}
+
+@-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }
 
 @keyframes blink {
-	from { opacity: 0; }
-	to { opacity: 1; }
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }
