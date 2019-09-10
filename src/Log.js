@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import VirtualizedList from './VirtualizedList';
+import {List, AutoSizer} from "react-virtualized";
 import './Log.css';
 
 const lines = [
@@ -13,8 +9,18 @@ const lines = [
   "POLICY.WRITE_ACCESS => POLICY.REVOKED",
   "POLICY.FETCH => POLICY.REVOKED"]
 
+const height = 100;
+const rowHeight = 40;
+const width = 200;
+
 class Log extends Component {
-  state = {
+  rowRenderer = ({ index, isScrolling, key, style }) => {
+    return (
+      <div key={key} style={style}>
+        <div>{this.props.data[index].username}</div>
+        <div>{this.props.data[index].email}</div>
+      </div>
+    );
   };
 
   render() {
@@ -30,11 +36,19 @@ class Log extends Component {
             </span>
           </div>
           <hr className="hr"></hr>
-          <div className="text">Logs...</div>
-          <div className="text">hey</div>
-          <VirtualizedList>
-          Hello world
-          </VirtualizedList>
+          <div className="text">
+            Logs
+            <hr className="hr"></hr>
+            <List
+              rowCount={this.props.data.length}
+              width={width}
+              height={height}
+              rowHeight={rowHeight}
+              rowRenderer={this.rowRenderer}
+              overscanRowCount={3}
+            />
+        </div>
+
         </div>
     );
   }

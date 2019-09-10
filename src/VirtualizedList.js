@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     height: 400,
     maxWidth: 360,
   },
+  row: {
+    fontFamily: 'Ubuntu Mono',
+  },
 }));
 
 function Row(props) {
@@ -26,15 +29,10 @@ function Row(props) {
 
   return (
     <ListItem button style={style} key={index}>
-      <ListItemText primary={`${lines[index]}`} />
+      <ListItemText  primary={`${lines[index]}`} style={{fontFamily: 'Courier'}} />
     </ListItem>
   );
 }
-
-Row.propTypes = {
-  index: PropTypes.number.isRequired,
-  style: PropTypes.object.isRequired,
-};
 
 export default function VirtualizedList() {
   const classes = useStyles();

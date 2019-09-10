@@ -9,6 +9,7 @@
   "dependencies": {
     "@material-ui/core": "^4.4.1",
     "dotenv": "^8.1.0",
+    "faker": "^4.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.0.10",
