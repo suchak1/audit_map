@@ -80,8 +80,10 @@ a {
 }
 
 
-.waiting {
+.underline {
+  padding-left: 50%;
   position: relative;
+  text-align: center;
   display: inline-block;
   font-family: 'Ubuntu Mono', Courier, serif;
   font-size: inherit;
@@ -90,61 +92,18 @@ a {
   min-width: 1em;
 }
 
-.waiting::after {
+.underline::after {
+  color: #4481F8;
+  font-weight: bold;
   font-size: 0.8em;
-  color: lime;
-  content: "...waiting";
+  content: "_";
   position: absolute;
   top: 0;
   right: -0.5em;
   /* Remove display: inline-block if not required to be on the same line as text etc */
   display: inline-block;
-  background-color: #343332;
-  vertical-align: bottom;
   width: 0.25em;
-  /* Set height to the line height of .text */
-  height: 0.3em;
-  /*
-  Animation paramaters:
-  blink = animation-name,
-  1s = animation-duration,
-  step-end = animation-timing-function,
-  infinite = animation-iteration-count
-  */
 
-}
-
-.working {
-  position: relative;
-  display: inline-block;
-  font-family: 'Ubuntu Mono', Courier, serif;
-  font-size: inherit;
-  background-color: inherit;
-  line-height: 0em;
-  min-width: 1em;
-}
-
-.working::after {
-  font-size: 0.8em;
-  color: red;
-  content: "...working";
-  position: absolute;
-  top: 0;
-  right: -0.5em;
-  /* Remove display: inline-block if not required to be on the same line as text etc */
-  display: inline-block;
-  background-color: #343332;
-  vertical-align: bottom;
-  width: 0.25em;
-  /* Set height to the line height of .text */
-  height: 0.3em;
-  /*
-  Animation paramaters:
-  blink = animation-name,
-  1s = animation-duration,
-  step-end = animation-timing-function,
-  infinite = animation-iteration-count
-  */
   -webkit-animation: blink 1s step-end infinite;
   animation: blink 1s step-end infinite;
 

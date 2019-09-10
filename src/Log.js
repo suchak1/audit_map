@@ -6,7 +6,6 @@ const rowHeight = 30;
 
 class Log extends Component {
   state = {
-    status: "waiting",
   }
 
   padWord = (str, padNum) => {
@@ -28,7 +27,7 @@ class Log extends Component {
     return (
       <div key={key} style={style}>
       ACTION: <span style={{color: accessColor}}>{this.props.data[index].access.padEnd(9, '.')}</span> decrypt
-      &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "lightslategray"}}>{this.padWord(this.props.data[index].email, 25)}</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "darkgray"}}>{this.padWord(this.props.data[index].email, 25)}</span>
       &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{color: "peachpuff"}}>{this.padWord(this.props.data[index].file, 25)}</span>
       </div>
     );
@@ -61,8 +60,8 @@ class Log extends Component {
             </span>
 
           </div>
-          <div style={{color: '#4481F8', textAlign:"center", fontFamily: 'Ubuntu Mono'}}>
-            {"Logs_"}
+          <div className="underline">
+            {"Logs"}
           </div>
           <div className="list">
             <AutoSizer>
@@ -79,7 +78,8 @@ class Log extends Component {
             </AutoSizer>
           </div>
           <div style=
-          {{fontSize: "0.7em", textAlign: "right", paddingRight: "1em"}}>
+          {{fontSize: "0.7em", textAlign: "right",
+          paddingRight: "1em", color: "dimgray"}}>
             {"powered by"}
             <span style={{color: '#4481F8'}}>
               &nbsp;
@@ -93,7 +93,7 @@ class Log extends Component {
             <span>
               &nbsp;and&nbsp;
             </span>
-            <span style={{color: "dimgray"}}>
+            <span style={{color: "darkgray"}}>
               <a href="https://uber.github.io/react-map-gl/"> react-map-gl </a>
             </span>
           </div>
