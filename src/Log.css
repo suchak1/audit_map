@@ -1,7 +1,18 @@
 .virtru {
   color: #4481F8;
+  font-weight: bold;
 }
 
+.auditmap {
+  font-weight: bold;
+}
+
+.auditmap::before {
+  content: "Audit Map";
+  color: #343332;
+  font-weight: bold;
+  position: absolute;
+}
 .mapgray {
   color: #343332;
 }
@@ -19,7 +30,7 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #343332;
-  border: solid 1px slategray;
+  border: solid 1px darkslategray;
 }
 
 /* Handle on hover */
@@ -56,7 +67,6 @@
 
 
 .waiting {
-  padding-left: 91px;
   position: relative;
   display: inline-block;
   font-family: 'Ubuntu Mono', Courier, serif;
