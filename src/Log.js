@@ -1,15 +1,6 @@
 import React, {Component} from 'react';
 import {List, AutoSizer} from "react-virtualized";
-import VirtualizedList from './VirtualizedList';
-import {sizing} from '@material-ui/system';
 import './Log.css';
-
-const lines = [
-  "POLICY.ACCESSED => POLICY.REVOKED",
-  "POLICY.OPENED => POLICY.REVOKED",
-  "POLICY.READ_ACCESS => POLICY.REVOKED",
-  "POLICY.WRITE_ACCESS => POLICY.REVOKED",
-  "POLICY.FETCH => POLICY.REVOKED"]
 
 const rowHeight = 20;
 
@@ -18,7 +9,6 @@ class Log extends Component {
     status: "waiting",
   }
   rowRenderer = ({ index, isScrolling, key, style }) => {
-    this.state.status = isScrolling ?"working":"waiting";
     return (
       <div key={key} style={style}>
         <span>{this.props.data[index].username}</span>

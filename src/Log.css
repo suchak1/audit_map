@@ -1,3 +1,11 @@
+.virtru {
+  color: #4481F8;
+}
+
+.mapgray {
+  color: #343332;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -5,12 +13,13 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #191A1A;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #343332;
+  border: solid 1px slategray;
 }
 
 /* Handle on hover */
