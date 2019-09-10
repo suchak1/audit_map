@@ -1,3 +1,4 @@
+
 a {
   color: inherit;
   text-decoration: inherit;
@@ -42,7 +43,6 @@ a {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #343332;
-  border: solid 1px darkslategray;
 }
 
 /* Handle on hover */
@@ -81,6 +81,7 @@ a {
 
 
 .underline {
+  color: #4481F8;
   padding-left: 50%;
   position: relative;
   text-align: center;
@@ -93,7 +94,7 @@ a {
 }
 
 .underline::after {
-  color: #4481F8;
+  color: white;
   font-weight: bold;
   font-size: 0.8em;
   content: "_";

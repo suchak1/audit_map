@@ -58,7 +58,6 @@ class Log extends Component {
             <span style={{fontSize: "0.8em", color: "dimgray"}}>
               &nbsp;&nbsp;an entry for the Virtru Privacy Engineering Challenge
             </span>
-
           </div>
           <div className="underline">
             {"Logs"}
