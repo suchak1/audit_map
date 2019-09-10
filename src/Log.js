@@ -32,10 +32,10 @@ class Log extends Component {
         <div className="log">
           <div className="header">
             <span style={{color: "#4481F8"}}>
-              <b>Audit Map</b>
+              <b>{"A̩̯͔̞̙̮̰͗͑͋̎̒̓̚ͅu̖͖̝̟͎̦̦̞͈̤̐̑̆̈̆̂̀̊͒̄̃͒ͅd̳͍̮̖͌̅́̋ì̗̣̥̜̯̫̰̰͛͌̉͐̔̇́̊̈́͂́t͙̘̭̫͐̏̃͑͊̌̾̔̚ͅ M̫̟̮̣͉̭̗̳̲͉̌̌̑͋̽͋̀͗͐̾̚̚ͅà͙͎̲̲̈́̄́͑̂̆̄p͎͉̣̱̳̗͉̬̋̀͒̓̽̿̊ͅ > "}</b>
             </span>
-            <span style={{fontSize: "0.85em", color: "dimgray"}}>
-              an entry for the Virtru Privacy Engineering Challenge
+            <span style={{fontSize: "0.7em", color: "dimgray"}}>
+              &nbsp;&nbsp;an entry for the Virtru Privacy Engineering Challenge
             </span>
           </div>
           <div >
