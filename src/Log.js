@@ -40,7 +40,7 @@ class Log extends Component {
           </div>
           <div >
             <div style={{textAlign:"center", fontFamily: 'Ubuntu Mono'}}>
-              {"<Logs>"}
+              {"<Logs>"} <span className="waiting"> </span>
             </div>
           </div>
         <div className="list">
