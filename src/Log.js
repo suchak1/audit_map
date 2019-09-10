@@ -9,10 +9,12 @@ class Log extends Component {
     status: "waiting",
   }
   rowRenderer = ({ index, isScrolling, key, style }) => {
+    const accessColor = this.props.data[index].access === 'GRANT' ? 'lime' : 'red';
     return (
       <div key={key} style={style}>
-        <span>{this.props.data[index].username}</span>
-        <span>{this.props.data[index].email}</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;ACTION: <span style={{color: accessColor}}>{this.props.data[index].access}</span> decrypt access
+      &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{paddingLeft: "10%"}}>{this.props.data[index].email}</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{paddingRight: "0%"}}>{this.props.data[index].file}</span>
       </div>
     );
   };
@@ -21,7 +23,7 @@ class Log extends Component {
     let spans = [];
     for(let i = 0; i < str.length; i++)
     {
-      const randColor = Math.random()>0.3 ? '#4481F8' : 'dimgray';
+      const randColor = Math.random() > 0.3 ? '#4481F8' : 'dimgray';
       spans.push(
         <span style={{fontWeight:"bold", color: randColor}}>
           {str[i]}
@@ -42,11 +44,11 @@ class Log extends Component {
             <span style={{fontSize: "0.8em", color: "dimgray"}}>
               &nbsp;&nbsp;an entry for the Virtru Privacy Engineering Challenge
             </span>
+
           </div>
-          <div style={{textAlign:"center", fontFamily: 'Ubuntu Mono'}}>
+          <div style={{color: '#4481F8', textAlign:"center", fontFamily: 'Ubuntu Mono'}}>
             {"Logs_"}
           </div>
-          <span className="waiting"> </span>
           <div className="list">
             <AutoSizer>
               {({height, width}) => (
@@ -60,6 +62,12 @@ class Log extends Component {
                 />
               )}
             </AutoSizer>
+          </div>
+          <div style={{fontSize: "0.7em", textAlign: "right"}}>
+            {"powered by Virtru"}
+            <span>
+              <img alt="" src={require('./virtru.png')} height="25vh" width="25vw"/>
+            </span>
           </div>
         </div>
     );

@@ -13,8 +13,9 @@ function createRecord(count) {
 
   for (let i = 0; i < count; i++) {
     records.push({
-      username: faker.internet.userName(),
-      email: faker.internet.email()
+      email: faker.internet.email(),
+      file: faker.system.fileName(),
+      access: Math.random() > 0.3 ? 'REVOKE' : 'GRANT'
     });
   }
   return records;

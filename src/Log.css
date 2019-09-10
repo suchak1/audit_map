@@ -1,3 +1,9 @@
+.powered {
+  font-size: "0.7em";
+  text-align: "right";
+}
+
+
 .virtru {
   color: #4481F8;
   font-weight: bold;
@@ -38,9 +44,11 @@
   background: #555;
 }
 .list {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
   font-family: 'Ubuntu Mono';
   font-size: 0.85em;
+  color: silver;
   background-color: #343332;
   height: 20vh;
   overflow: hidden;
