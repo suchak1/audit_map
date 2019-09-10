@@ -50,8 +50,7 @@ a {
   background: #555;
 }
 .list {
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
   font-family: 'Ubuntu Mono';
   font-size: 0.85em;
   color: dimgray;

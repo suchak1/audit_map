@@ -2,19 +2,34 @@ import React, {Component} from 'react';
 import {List, AutoSizer} from "react-virtualized";
 import './Log.css';
 
-const rowHeight = 20;
+const rowHeight = 30;
 
 class Log extends Component {
   state = {
     status: "waiting",
   }
+
+  padWord = (str, padNum) => {
+    if (str.length <= 3) {
+      str = '';
+    }
+
+    if(str.length === padNum) {
+      return str;
+    }
+    else if(str.length < padNum) {
+      return str.padEnd(padNum, '.');
+    }
+    return str.substring(0, padNum-3)+'...';
+  };
+
   rowRenderer = ({ index, isScrolling, key, style }) => {
     const accessColor = this.props.data[index].access === 'GRANT' ? 'lime' : 'red';
     return (
       <div key={key} style={style}>
-      &nbsp;&nbsp;&nbsp;&nbsp;ACTION: <span style={{color: accessColor}}>{this.props.data[index].access}</span> decrypt access
-      &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{paddingLeft: "10%"}}>{this.props.data[index].email}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{paddingRight: "0%"}}>{this.props.data[index].file}</span>
+      ACTION: <span style={{color: accessColor}}>{this.props.data[index].access.padEnd(9, '.')}</span> decrypt
+      &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "lightslategray"}}>{this.padWord(this.props.data[index].email, 25)}</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{color: "peachpuff"}}>{this.padWord(this.props.data[index].file, 25)}</span>
       </div>
     );
   };
