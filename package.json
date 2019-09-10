@@ -1,17 +1,22 @@
 {
   "name": "audit_map",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "engines": {
     "node": ">=10.0.0",
     "npm": ">=6.0.0"
   },
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.4.1",
     "dotenv": "^8.1.0",
+    "faker": "^4.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.0.10",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "react-virtualized": "^9.21.1",
+    "react-window": "^1.8.5",
+    "typeface-ubuntu-mono": "0.0.72"
   },
   "scripts": {
     "start": "react-scripts start",

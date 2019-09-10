@@ -1,0 +1,123 @@
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.powered {
+  font-family: 'Ubuntu Mono';
+  font-size: 10px;
+  text-align: "right";
+  padding-right: 1em;
+}
+
+
+.virtru {
+  color: #4481F8;
+  font-weight: bold;
+}
+
+.auditmap {
+  font-weight: bold;
+}
+
+.auditmap::before {
+  content: "Audit Map";
+  color: #343332;
+  font-weight: bold;
+  position: absolute;
+}
+.mapgray {
+  color: #343332;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #191A1A;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #343332;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.list {
+  text-align: center;
+  font-family: 'Ubuntu Mono';
+  font-size: 0.85em;
+  color: dimgray;
+  background-color: black;
+  height: 15vh;
+  overflow: hidden;
+}
+
+
+.hr {
+  border: 1px solid #343332;
+}
+
+.log {
+  width: auto;
+  min-height: 34.5vh;
+  background-color: #191A1A;
+  color: white;
+  border: 1px solid #343332;
+}
+
+.header {
+  padding-left: 10%;
+  display: flex;
+  align-content: center;
+  align-items: baseline;
+}
+
+
+.underline {
+  color: #4481F8;
+  padding-left: 50%;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  font-family: 'Ubuntu Mono', Courier, serif;
+  font-size: inherit;
+  background-color: inherit;
+  line-height: 0em;
+  min-width: 1em;
+}
+
+.underline::after {
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  content: "_";
+  position: absolute;
+  top: 0;
+  right: -0.5em;
+  /* Remove display: inline-block if not required to be on the same line as text etc */
+  display: inline-block;
+  width: 0.25em;
+
+  -webkit-animation: blink 1s step-end infinite;
+  animation: blink 1s step-end infinite;
+
+}
+
+@-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
