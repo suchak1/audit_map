@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {List, AutoSizer} from "react-virtualized";
+import VirtualizedList from './VirtualizedList';
+import {sizing} from '@material-ui/system';
 import './Log.css';
 
 const lines = [
@@ -9,16 +11,18 @@ const lines = [
   "POLICY.WRITE_ACCESS => POLICY.REVOKED",
   "POLICY.FETCH => POLICY.REVOKED"]
 
-const height = 100;
-const rowHeight = 40;
-const width = 200;
+const rowHeight = 20;
 
 class Log extends Component {
+  state = {
+    status: "waiting",
+  }
   rowRenderer = ({ index, isScrolling, key, style }) => {
+    this.state.status = isScrolling ?"working":"waiting";
     return (
       <div key={key} style={style}>
-        <div>{this.props.data[index].username}</div>
-        <div>{this.props.data[index].email}</div>
+        <span>{this.props.data[index].username}</span>
+        <span>{this.props.data[index].email}</span>
       </div>
     );
   };
@@ -35,10 +39,12 @@ class Log extends Component {
               an entry for the Virtru Privacy Engineering Challenge
             </span>
           </div>
-          <hr className="hr"></hr>
           <div className="text">
             Logs
-            <hr className="hr"></hr>
+          </div>
+        <div className="grow2">
+        <AutoSizer>
+          {({height, width}) => (
             <List
               rowCount={this.props.data.length}
               width={width}
@@ -47,8 +53,9 @@ class Log extends Component {
               rowRenderer={this.rowRenderer}
               overscanRowCount={3}
             />
+          )}
+        </AutoSizer>
         </div>
-
         </div>
     );
   }

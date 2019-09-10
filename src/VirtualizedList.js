@@ -39,7 +39,7 @@ export default function VirtualizedList() {
 
   return (
     <div className={classes.root}>
-      <FixedSizeList height={400} width={window.innerWidth} itemSize={46} itemCount={200}>
+      <FixedSizeList height={window.innerHeight} width={window.innerWidth-20} itemSize={46} itemCount={200}>
         {Row}
       </FixedSizeList>
     </div>

@@ -1,9 +1,21 @@
+.grow {
+  display: flex;
+  flex: 1 1 1 1;
+}
+
+.grow2 {
+  font-family: 'Ubuntu Mono';
+  font-size: 0.85em;
+  background-color: #343332;
+  min-height: 14vh;
+}
 
 .hr {
   border: 1px solid #343332;
 }
+
 .log {
-  height: 24vh;
+  width: auto;
   background-color: #191A1A;
   color: white;
   border: 1px solid #343332;
@@ -22,7 +34,9 @@ body { background: black }
   position: relative;
   display: inline-block;
   font-family: 'Ubuntu Mono', Courier, serif;
-  line-height: 24px;
+  font-size: inherit;
+  background-color: inherit;
+  line-height: 0.5em;
   min-width: 10px;
 }
 
@@ -33,11 +47,11 @@ body { background: black }
   right: -15px;
   /* Remove display: inline-block if not required to be on the same line as text etc */
   display: inline-block;
-  background-color: #606060;
+  background-color: #343332;
   vertical-align: top;
-  width: 10px;
+  width: 0.25em;
   /* Set height to the line height of .text */
-  height: 24px;
+  height: 0.5em;
   /*
   Animation paramaters:
   blink = animation-name,
