@@ -1,13 +1,10 @@
-.grow {
-  display: flex;
-  flex: 1 1 1 1;
-}
 
-.grow2 {
+.list {
+  text-align: center;
   font-family: 'Ubuntu Mono';
   font-size: 0.85em;
   background-color: #343332;
-  min-height: 14vh;
+  height: 20vh;
 }
 
 .hr {
@@ -16,6 +13,7 @@
 
 .log {
   width: auto;
+  min-height: 29.5vh;
   background-color: #191A1A;
   color: white;
   border: 1px solid #343332;
@@ -27,31 +25,66 @@
   align-items: baseline;
 }
 
-/* body and .text are NOT required for the blinking cursor. */
-body { background: black }
 
-.text {
+.waiting {
+  padding-left: 91px;
   position: relative;
   display: inline-block;
   font-family: 'Ubuntu Mono', Courier, serif;
   font-size: inherit;
   background-color: inherit;
-  line-height: 0.5em;
-  min-width: 10px;
+  line-height: 0em;
+  min-width: 1em;
 }
 
-.text::after {
-  content: "";
+.waiting::after {
+  font-size: 0.8em;
+  color: lime;
+  content: "...waiting";
   position: absolute;
   top: 0;
-  right: -15px;
+  right: -0.5em;
   /* Remove display: inline-block if not required to be on the same line as text etc */
   display: inline-block;
   background-color: #343332;
-  vertical-align: top;
+  vertical-align: bottom;
   width: 0.25em;
   /* Set height to the line height of .text */
-  height: 0.5em;
+  height: 0.3em;
+  /*
+  Animation paramaters:
+  blink = animation-name,
+  1s = animation-duration,
+  step-end = animation-timing-function,
+  infinite = animation-iteration-count
+  */
+
+}
+
+.working {
+  position: relative;
+  display: inline-block;
+  font-family: 'Ubuntu Mono', Courier, serif;
+  font-size: inherit;
+  background-color: inherit;
+  line-height: 0em;
+  min-width: 1em;
+}
+
+.working::after {
+  font-size: 0.8em;
+  color: red;
+  content: "...working";
+  position: absolute;
+  top: 0;
+  right: -0.5em;
+  /* Remove display: inline-block if not required to be on the same line as text etc */
+  display: inline-block;
+  background-color: #343332;
+  vertical-align: bottom;
+  width: 0.25em;
+  /* Set height to the line height of .text */
+  height: 0.3em;
   /*
   Animation paramaters:
   blink = animation-name,
@@ -61,6 +94,7 @@ body { background: black }
   */
   -webkit-animation: blink 1s step-end infinite;
   animation: blink 1s step-end infinite;
+
 }
 
 @-webkit-keyframes blink {

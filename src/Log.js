@@ -34,15 +34,16 @@ class Log extends Component {
             <span style={{color: "#4481F8"}}>
               <b>Audit Map</b>
             </span>
-            <span style={{color: "#343332"}}> | </span>
             <span style={{fontSize: "0.85em", color: "dimgray"}}>
               an entry for the Virtru Privacy Engineering Challenge
             </span>
           </div>
-          <div className="text">
-            Logs
+          <div >
+            <div style={{textAlign:"center", fontFamily: 'Ubuntu Mono'}}>
+              {"<Logs>"}
+            </div>
           </div>
-        <div className="grow2">
+        <div className="list">
         <AutoSizer>
           {({height, width}) => (
             <List
