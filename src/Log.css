@@ -1,6 +1,12 @@
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
 .powered {
-  font-size: "0.7em";
+  font-family: 'Ubuntu Mono';
+  font-size: 10px;
   text-align: "right";
+  padding-right: 1em;
 }
 
 
@@ -48,11 +54,12 @@
   justify-content: space-between;
   font-family: 'Ubuntu Mono';
   font-size: 0.85em;
-  color: silver;
-  background-color: #343332;
-  height: 20vh;
+  color: dimgray;
+  background-color: black;
+  height: 15vh;
   overflow: hidden;
 }
+
 
 .hr {
   border: 1px solid #343332;
@@ -60,7 +67,7 @@
 
 .log {
   width: auto;
-  min-height: 29.5vh;
+  min-height: 34.5vh;
   background-color: #191A1A;
   color: white;
   border: 1px solid #343332;

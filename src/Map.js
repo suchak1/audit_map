@@ -19,7 +19,7 @@ class Map extends Component {
     return (
       <ReactMapGL {...viewport}
         width = "100%"
-        height = "70vh"
+        height = "65vh"
         attributionControl = {false}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
         mapStyle = 'mapbox://styles/suchak1/ck0ahex6o26ri1co8gmm3ezvr'

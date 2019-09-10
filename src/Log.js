@@ -58,15 +58,28 @@ class Log extends Component {
                   height={height}
                   rowHeight={rowHeight}
                   rowRenderer={this.rowRenderer}
-                  overscanRowCount={3}
+                  overscanRowCount={100}
                 />
               )}
             </AutoSizer>
           </div>
-          <div style={{fontSize: "0.7em", textAlign: "right"}}>
-            {"powered by Virtru"}
+          <div style=
+          {{fontSize: "0.7em", textAlign: "right", paddingRight: "1em"}}>
+            {"powered by"}
+            <span style={{color: '#4481F8'}}>
+              &nbsp;
+              {
+                <a href=
+                  "https://developer.virtru.com/docs/getting-started-node-js"
+                >
+                  virtru-sdk
+                </a>}
+            </span>
             <span>
-              <img alt="" src={require('./virtru.png')} height="25vh" width="25vw"/>
+              &nbsp;and&nbsp;
+            </span>
+            <span style={{color: "dimgray"}}>
+              <a href="https://uber.github.io/react-map-gl/"> react-map-gl </a>
             </span>
           </div>
         </div>
