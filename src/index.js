@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Map from './Map';
 import Log from './Log';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 import faker from 'faker';
 require('dotenv').config();
@@ -23,7 +24,7 @@ function createRecord(count) {
 
 const records = createRecord(100);
 
-ReactDOM.render(<><Map /><Log data={records} /></>, document.getElementById('root'));
+ReactDOM.render(<><App /><Log data={records} /></>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactMapGL, {NavigationControl} from 'react-map-gl';
+import ReactMapGL, {NavigationControl, Marker} from 'react-map-gl';
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -24,6 +24,7 @@ class Map extends Component {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
         mapStyle = 'mapbox://styles/suchak1/ck0ahex6o26ri1co8gmm3ezvr'
         onViewportChange={viewport => this.setState({viewport})}>
+        <Marker latitude={37.78} longitude={-122.41} offsetLeft={-20} offsetTop={-10}/>
         <div style={{position: 'absolute', right: 0}}>
           <NavigationControl />
         </div>

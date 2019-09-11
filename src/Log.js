@@ -84,8 +84,8 @@ class Log extends Component {
               &nbsp;
               {
                 <a href=
-                  "https://developer.virtru.com/docs/getting-started-node-js"
-                >
+                "https://developer.virtru.com/docs/getting-started-node-js"
+                target="_blank" rel="noopener noreferrer">
                   virtru-sdk
                 </a>}
             </span>
@@ -93,7 +93,10 @@ class Log extends Component {
               &nbsp;and&nbsp;
             </span>
             <span style={{color: "darkgray"}}>
-              <a href="https://uber.github.io/react-map-gl/"> react-map-gl </a>
+              <a href="https://uber.github.io/react-map-gl/" target="_blank"
+              rel="noopener noreferrer">
+                react-map-gl
+              </a>
             </span>
           </div>
         </div>
