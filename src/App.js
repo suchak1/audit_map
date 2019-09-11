@@ -80,7 +80,7 @@ export default class App extends Component {
         height="100vh"
         mapStyle="mapbox://styles/mapbox/dark-v9"
         onViewportChange={this._updateViewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
+        mapboxApiAccessToken={TOKEN}
       >
         {CITIES.map(this._renderCityMarker)}
 
