@@ -52,6 +52,8 @@ npm start
 
 ## Result
 
+![Screenshot of Audit Map](pics/half3.PNG)
+
 ## Files
 
 - [```.env```](.env) - credentials file
