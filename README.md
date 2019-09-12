@@ -52,6 +52,8 @@ npm start
 
 ## Result
 
+![](pics/half3.png)
+
 ## Files
 
 - [```.env```](.env) - credentials file
