@@ -24,16 +24,17 @@ const navStyle = {
   padding: '10px'
 };
 
+const width = window.innerWidth;
+const height = window.innerHeight;
+const winSize = width * height;
+const zoom = winSize < 260000 ?  0 : (winSize < 580000 ? 0.5: 1);
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       viewport: {
-        latitude: 37.785164,
-        longitude: -100,
-        zoom: 3.5,
-        bearing: 0,
-        pitch: 0
+        zoom: zoom,
       },
       popupInfo: null
     };
@@ -76,8 +77,8 @@ export default class App extends Component {
     return (
       <MapGL
         {...viewport}
-        width="100vw"
-        height="100vh"
+        width="100%"
+        height="65vh"
         mapStyle="mapbox://styles/mapbox/dark-v9"
         onViewportChange={this._updateViewport}
         mapboxApiAccessToken={TOKEN}
