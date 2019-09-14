@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Map from './Map';
 import Log from './Log';
+import Map from './Map';
 import * as serviceWorker from './serviceWorker';
 import faker from 'faker';
 require('dotenv').config();
