@@ -9,10 +9,7 @@ export default class ControlPanel extends PureComponent {
 
     return (
       <Container>
-        <label>
-          <h4><button>Import File ↗ </button></h4>
-          <input type="file"></input>
-        </label>
+          <button className = "import">Import File ↗</button>
       </Container>
     );
   }
