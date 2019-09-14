@@ -8,21 +8,6 @@ import PinInfo from './PinInfo';
 import CITIES from './cities.json';
 
 
-const nav = {
-  position: 'absolute',
-  top: 36,
-  left: 0,
-  padding: '10px'
-}
-
-const fullscreen = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  padding: '10px'
-};
-
-
 const width = window.innerWidth;
 const height = window.innerHeight;
 const winSize = width * height;
@@ -81,11 +66,11 @@ class Map extends Component {
         {this._renderPopup()}
 
 
-        <div style = {fullscreen}>
+        <div className = "fullscreen">
           <FullscreenControl />
         </div>
 
-        <div style = {nav}>
+        <div className = "nav">
           <NavigationControl />
         </div>
 
