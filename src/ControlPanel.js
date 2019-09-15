@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import './Map.css';
 
 const defaultContainer = ({children}) => <div className="control-panel">{children}</div>;
 

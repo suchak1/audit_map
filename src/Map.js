@@ -4,6 +4,7 @@ import MapGL, {Marker, Popup,
 import ControlPanel from './ControlPanel';
 import Pin from './Pin';
 import PinInfo from './PinInfo';
+import './Map.css';
 
 import CITIES from './cities.json';
 
@@ -12,6 +13,20 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 const winSize = width * height;
 const zoom = winSize < 260000 ?  0 : (winSize < 580000 ? 0.5: 1);
+
+const nav = {
+  position: 'absolute',
+  top: 36,
+  left: 0,
+  padding: '10px',
+}
+
+const fullscreen = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  padding: '10px',
+};
 
 
 class Map extends Component {
@@ -51,7 +66,9 @@ class Map extends Component {
 
   render() {
     const {viewport} = this.state;
+    console.log(this.state);
     return (
+      <><div style = {{color: "white"}}>{this.state.ip_addrs}</div>
       <MapGL
         {...viewport}
         width = "100%"
@@ -66,16 +83,17 @@ class Map extends Component {
         {this._renderPopup()}
 
 
-        <div className = "fullscreen">
+        <div style = {fullscreen}>
           <FullscreenControl />
         </div>
 
-        <div className = "nav">
+        <div style = {nav}>
           <NavigationControl />
         </div>
 
         <ControlPanel containerComponent={this.props.containerComponent} />
       </MapGL>
+      </>
     );
   }
 }
