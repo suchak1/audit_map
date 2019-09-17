@@ -80,7 +80,11 @@ class Map extends Component {
       >
 
         {console.log(this.props.data)}
-        {Object.keys(this.props.data).map(this._renderCityMarker)}
+        {
+          for (var key in Object.keys(this.props.data)) {
+          this._renderCityMarker(this.props.data[key]);
+          }
+        }
         {this._renderPopup()}
 
 

@@ -46,7 +46,7 @@ ip2geo = (ip) => {
     for (var i in ips) {
       var ip = ips[i];
       var entry = this.ip2geo(ip);
-      console.log(entry);
+      // console.log(entry);
       this.setState({
         ...this.state,
         ip_addrs: {
@@ -56,7 +56,7 @@ ip2geo = (ip) => {
       });
     }
 
-    console.log(this.state.ip_addrs);
+    // console.log(this.state.ip_addrs);
 
   }
 
