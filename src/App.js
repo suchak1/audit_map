@@ -27,22 +27,17 @@ class App extends Component {
     this.state = {ip_addrs: {}};
   }
 
-  async ip2geo (ip) {
-    const result = await fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
+ip2geo = (ip) => {
+    let entry = {};
+
+    fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
       process.env.REACT_APP_IPSTACK)
-        .then((response) => {
-          console.log(response);
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          return data;
+        .then(response => response.json())
+        .then(data => {
+          entry['lat'] = data.latitude;
+          entry['long'] = data.longitude;
         });
 
-    const entry = {
-      'lat': result.latitude,
-      'long': result.longitude
-    }
     return entry;
   }
 
