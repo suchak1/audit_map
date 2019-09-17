@@ -4,6 +4,7 @@ import './Map.css';
 import Log from './Log';
 import faker from 'faker';
 
+var ips = ['69.243.229.184', '96.150.51.147'];
 
 function createRecord(count) {
   let records = [];
@@ -42,26 +43,20 @@ ip2geo = (ip) => {
   }
 
   componentDidMount() {
-    var ips = ['69.243.229.184'];
     for (var i in ips) {
       var ip = ips[i];
       var entry = this.ip2geo(ip);
       // console.log(entry);
+      let copy = this.state.ip_addrs;
+      copy[ip] = entry;
       this.setState({
-        ...this.state,
-        ip_addrs: {
-          ...this.state.ip_addrs,
-          [ip]: entry
-        }
+        ip_addrs: copy
       });
     }
-
-    // console.log(this.state.ip_addrs);
-
   }
 
   render() {
-    // console.log(this.state.ip_addrs);
+    console.log(this.state.ip_addrs);
     return (<><Map data = {this.state.ip_addrs}/><Log data = {records}/></>
     );
   }

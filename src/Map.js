@@ -39,6 +39,9 @@ class Map extends Component {
 
   _renderCityMarker = (ip, index) => {
     console.log(ip);
+    if(!ip || !ip.lat || !ip.long) {
+      return null;
+    }
     return (
       <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
         <Pin size={20} onClick={() => this.setState({popupInfo: ip})} />
@@ -80,11 +83,7 @@ class Map extends Component {
       >
 
         {console.log(this.props.data)}
-        {
-          for (var key in Object.keys(this.props.data)) {
-          this._renderCityMarker(this.props.data[key]);
-          }
-        }
+        {Object.keys(this.props.data).map((key, index) => this._renderCityMarker(this.props.data[key]))}
         {this._renderPopup()}
 
 
