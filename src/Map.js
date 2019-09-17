@@ -37,10 +37,11 @@ class Map extends Component {
     popupInfo: null
   };
 
-  _renderCityMarker = (city, index) => {
+  _renderCityMarker = (ip, index) => {
+    console.log(ip);
     return (
-      <Marker key={`marker-${index}`} longitude={city.longitude} latitude={city.latitude}>
-        <Pin size={20} onClick={() => this.setState({popupInfo: city})} />
+      <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
+        <Pin size={20} onClick={() => this.setState({popupInfo: ip})} />
       </Marker>
     );
   };
@@ -53,8 +54,8 @@ class Map extends Component {
         <Popup
           tipSize={5}
           anchor="top"
-          longitude={popupInfo.longitude}
-          latitude={popupInfo.latitude}
+          longitude={popupInfo.long}
+          latitude={popupInfo.lat}
           closeOnClick={false}
           onClose={() => this.setState({popupInfo: null})}
         >
@@ -66,7 +67,6 @@ class Map extends Component {
 
   render() {
     const {viewport} = this.state;
-    console.log(this.state);
     return (
       <><div style = {{color: "white"}}>{this.state.ip_addrs}</div>
       <MapGL
@@ -79,7 +79,8 @@ class Map extends Component {
         onViewportChange={viewport => this.setState({viewport})}
       >
 
-        {CITIES.map(this._renderCityMarker)}
+        {console.log(this.props.data)}
+        {Object.keys(this.props.data).map(this._renderCityMarker)}
         {this._renderPopup()}
 
 

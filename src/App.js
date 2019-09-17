@@ -19,41 +19,55 @@ function createRecord(count) {
 }
 
 const records = createRecord(100);
-var ips2 = ['69.243.229.184'];
-var ip_addrs2 = {};
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {ips: ips2, ip_addrs: ip_addrs2};
-    console.log(this.state);
+    this.state = {ip_addrs: {}};
+  }
+
+  async ip2geo (ip) {
+    const result = await fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
+      process.env.REACT_APP_IPSTACK)
+        .then((response) => {
+          console.log(response);
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          return data;
+        });
+
+    const entry = {
+      'lat': result.latitude,
+      'long': result.longitude
+    }
+    return entry;
   }
 
   componentDidMount() {
-    var ip = '69.243.229.184';
-    fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
-      process.env.REACT_APP_IPSTACK)
-        .then((response) => {
-          return response.json();
-        })
-        .then((myJson) => {
-          console.log(myJson);
-          var copy = {};
-          copy[ip] = {};
-          copy[ip]['lat'] = myJson.latitude;
-          copy[ip]['long'] = myJson.longitude;
-          console.log(copy);
-          console.log(copy[ip]['lat']);
-          console.log(copy[ip]['long']);
-          console.log(myJson.city);
-          this.setState({ ip_addrs: copy});
-          console.log(this.state);
-        });
+    var ips = ['69.243.229.184'];
+    for (var i in ips) {
+      var ip = ips[i];
+      var entry = this.ip2geo(ip);
+      console.log(entry);
+      this.setState({
+        ...this.state,
+        ip_addrs: {
+          ...this.state.ip_addrs,
+          [ip]: entry
+        }
+      });
+    }
+
+    console.log(this.state.ip_addrs);
+
   }
 
   render() {
-    return (<><Map /><Log data = {records}/></>
+    // console.log(this.state.ip_addrs);
+    return (<><Map data = {this.state.ip_addrs}/><Log data = {records}/></>
     );
   }
 }
