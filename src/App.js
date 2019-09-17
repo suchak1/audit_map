@@ -26,17 +26,18 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.setState = {ips: ips2, ip_addrs: ip_addrs2};
+    this.state = {ips: ips2, ip_addrs: ip_addrs2};
+    console.log(this.state);
   }
 
   componentDidMount() {
     var ip = '69.243.229.184';
     fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
       process.env.REACT_APP_IPSTACK)
-        .then(function(response) {
+        .then((response) => {
           return response.json();
         })
-        .then(function(myJson) {
+        .then((myJson) => {
           console.log(myJson);
           var copy = {};
           copy[ip] = {};
@@ -46,7 +47,8 @@ class App extends Component {
           console.log(copy[ip]['lat']);
           console.log(copy[ip]['long']);
           console.log(myJson.city);
-          //this.setState({ ip_addrs: copy});
+          this.setState({ ip_addrs: copy});
+          console.log(this.state);
         });
   }
 
