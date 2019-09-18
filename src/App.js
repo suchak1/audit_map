@@ -26,9 +26,10 @@ class App extends Component {
     super(props);
 
     this.state = {ip_addrs: {}};
+    this.updateGeos(ips);
   }
 
-ip2geo = (ip) => {
+  ip2geo = (ip) => {
     let entry = {};
 
     fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
@@ -42,7 +43,7 @@ ip2geo = (ip) => {
     return entry;
   }
 
-  componentDidMount() {
+  updateGeos = (ips) => {
     for (var i in ips) {
       var ip = ips[i];
       var entry = this.ip2geo(ip);
@@ -54,6 +55,10 @@ ip2geo = (ip) => {
       });
     }
   }
+
+  // componentDidMount() {
+  //   this.updateGeos(ips);
+  // }
 
   render() {
     console.log(this.state.ip_addrs);

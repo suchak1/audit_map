@@ -30,12 +30,17 @@ const fullscreen = {
 
 
 class Map extends Component {
-  state = {
-    viewport: {
-      zoom: zoom
-    },
-    popupInfo: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewport: {
+        zoom: zoom
+      },
+      popupInfo: null,
+      data: this.props.data
+    };
+  }
+
 
   _renderCityMarker = (ip, index) => {
     console.log(ip);
@@ -82,8 +87,8 @@ class Map extends Component {
         onViewportChange={viewport => this.setState({viewport})}
       >
 
-        {console.log(this.props.data)}
-        {Object.keys(this.props.data).map((key, index) => this._renderCityMarker(this.props.data[key]))}
+        {console.log(this.state.data)}
+        {Object.keys(this.state.data).map((key, index) => this._renderCityMarker(this.state.data[key]))}
         {this._renderPopup()}
 
 
