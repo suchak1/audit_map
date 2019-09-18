@@ -25,40 +25,40 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {ip_addrs: {}};
-    this.updateGeos(ips);
+    this.state = {ip_addrs: this.updateGeos(ips)};
   }
 
   ip2geo = (ip) => {
-    let entry = {};
+    if (process.env.REACT_APP_DEBUG === "true") {
+      return {
+        'lat': Number(faker.address.latitude()),
+        'long': Number(faker.address.longitude())
+      };
+    } else {
+      let entry = {};
 
-    fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
-      process.env.REACT_APP_IPSTACK)
-        .then(response => response.json())
-        .then(data => {
-          entry['lat'] = data.latitude;
-          entry['long'] = data.longitude;
-        });
+      fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
+        process.env.REACT_APP_IPSTACK)
+          .then(response => response.json())
+          .then(data => {
+            entry['lat'] = data.latitude;
+            entry['long'] = data.longitude;
+          });
 
-    return entry;
-  }
-
-  updateGeos = (ips) => {
-    for (var i in ips) {
-      var ip = ips[i];
-      var entry = this.ip2geo(ip);
-      // console.log(entry);
-      let copy = this.state.ip_addrs;
-      copy[ip] = entry;
-      this.setState({
-        ip_addrs: copy
-      });
+      return entry;
     }
   }
 
-  // componentDidMount() {
-  //   this.updateGeos(ips);
-  // }
+  updateGeos = (ips) => {
+    let geos = {};
+    for (var i in ips) {
+      const ip = ips[i];
+      const entry = this.ip2geo(ip);
+      // console.log(entry);
+      geos[ip] = entry;
+    }
+    return geos;
+  }
 
   render() {
     console.log(this.state.ip_addrs);

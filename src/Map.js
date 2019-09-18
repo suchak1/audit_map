@@ -6,8 +6,6 @@ import Pin from './Pin';
 import PinInfo from './PinInfo';
 import './Map.css';
 
-import CITIES from './cities.json';
-
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -88,7 +86,8 @@ class Map extends Component {
       >
 
         {console.log(this.state.data)}
-        {Object.keys(this.state.data).map((key, index) => this._renderCityMarker(this.state.data[key]))}
+        {Object.keys(this.state.data).map((key, index) =>
+          this._renderCityMarker(this.state.data[key], key))}
         {this._renderPopup()}
 
 
