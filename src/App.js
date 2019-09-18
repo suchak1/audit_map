@@ -4,6 +4,7 @@ import './Map.css';
 import Log from './Log';
 import faker from 'faker';
 
+var ips = ['69.243.229.184', '96.150.51.147'];
 
 function createRecord(count) {
   let records = [];
@@ -19,41 +20,49 @@ function createRecord(count) {
 }
 
 const records = createRecord(100);
-var ips2 = ['69.243.229.184'];
-var ip_addrs2 = {};
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {ips: ips2, ip_addrs: ip_addrs2};
-    console.log(this.state);
+    this.state = {ip_addrs: this.updateGeos(ips)};
   }
 
-  componentDidMount() {
-    var ip = '69.243.229.184';
-    fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
-      process.env.REACT_APP_IPSTACK)
-        .then((response) => {
-          return response.json();
-        })
-        .then((myJson) => {
-          console.log(myJson);
-          var copy = {};
-          copy[ip] = {};
-          copy[ip]['lat'] = myJson.latitude;
-          copy[ip]['long'] = myJson.longitude;
-          console.log(copy);
-          console.log(copy[ip]['lat']);
-          console.log(copy[ip]['long']);
-          console.log(myJson.city);
-          this.setState({ ip_addrs: copy});
-          console.log(this.state);
-        });
+  ip2geo = (ip) => {
+    if (process.env.REACT_APP_DEBUG === "true") {
+      return {
+        'lat': Number(faker.address.latitude()),
+        'long': Number(faker.address.longitude())
+      };
+    } else {
+      let entry = {};
+
+      fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
+        process.env.REACT_APP_IPSTACK)
+          .then(response => response.json())
+          .then(data => {
+            entry['lat'] = data.latitude;
+            entry['long'] = data.longitude;
+          });
+
+      return entry;
+    }
+  }
+
+  updateGeos = (ips) => {
+    let geos = {};
+    for (var i in ips) {
+      const ip = ips[i];
+      const entry = this.ip2geo(ip);
+      // console.log(entry);
+      geos[ip] = entry;
+    }
+    return geos;
   }
 
   render() {
-    return (<><Map /><Log data = {records}/></>
+    console.log(this.state.ip_addrs);
+    return (<><Map data = {this.state.ip_addrs}/><Log data = {records}/></>
     );
   }
 }

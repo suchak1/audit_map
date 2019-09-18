@@ -6,8 +6,6 @@ import Pin from './Pin';
 import PinInfo from './PinInfo';
 import './Map.css';
 
-import CITIES from './cities.json';
-
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -30,17 +28,26 @@ const fullscreen = {
 
 
 class Map extends Component {
-  state = {
-    viewport: {
-      zoom: zoom
-    },
-    popupInfo: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewport: {
+        zoom: zoom
+      },
+      popupInfo: null,
+      data: this.props.data
+    };
+  }
 
-  _renderCityMarker = (city, index) => {
+
+  _renderCityMarker = (ip, index) => {
+    console.log(ip);
+    if(!ip || !ip.lat || !ip.long) {
+      return null;
+    }
     return (
-      <Marker key={`marker-${index}`} longitude={city.longitude} latitude={city.latitude}>
-        <Pin size={20} onClick={() => this.setState({popupInfo: city})} />
+      <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
+        <Pin size={20} onClick={() => this.setState({popupInfo: ip})} />
       </Marker>
     );
   };
@@ -53,8 +60,8 @@ class Map extends Component {
         <Popup
           tipSize={5}
           anchor="top"
-          longitude={popupInfo.longitude}
-          latitude={popupInfo.latitude}
+          longitude={popupInfo.long}
+          latitude={popupInfo.lat}
           closeOnClick={false}
           onClose={() => this.setState({popupInfo: null})}
         >
@@ -66,7 +73,6 @@ class Map extends Component {
 
   render() {
     const {viewport} = this.state;
-    console.log(this.state);
     return (
       <><div style = {{color: "white"}}>{this.state.ip_addrs}</div>
       <MapGL
@@ -79,7 +85,9 @@ class Map extends Component {
         onViewportChange={viewport => this.setState({viewport})}
       >
 
-        {CITIES.map(this._renderCityMarker)}
+        {console.log(this.state.data)}
+        {Object.keys(this.state.data).map((key, index) =>
+          this._renderCityMarker(this.state.data[key], key))}
         {this._renderPopup()}
 
 
