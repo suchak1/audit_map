@@ -9,7 +9,7 @@
 #### an entry for the Virtru Privacy Engineering Challenge
 ***
 
-Using geolocation of IP addresses from Audit data, we can pinpoint visually where bad actors access and send data. Thus, potentially halting the spread of sensitive information by simply revoking access.
+Through the use of geolocation (specifically by mapping IP addresses that have accessed encrypted data to specific lat/long coordinates), we can visually pinpoint where bad actors access and send data. Thus, we can potentially halt the spread of sensitive information by simply revoking access directly on the map.
 
 ## Getting Started
 
@@ -59,6 +59,28 @@ npm start
 - [```.env```](.env) - credentials file
 
 - [```.travis.yml```](.travis.yml) - build pipeline
+
+
+## TODO:
+- Add Revoke button
+- Mapbox
+  - button should change state
+  - button should reflect state change (greyed out "REVOKED" or alt "GRANT")
+  - state change should trigger file policy change (revoke, grant access)
+  - change marker color based on row props data access
+  - log should reflect state change
+
+- Virtru SDK Integration
+  - log should have fields for user, city, and filename - (perhaps time too)
+  - app state should record date/time, city, ip address, geolocation, filename, user
+  - handle file upload (Maven Pro font)
+  - use access json data
+  - add mock data
+  - color markers based on access type (green grant, red revoke- css)
+- Add Credentials
+  - provide template for .env file
+  - add travis-ci encrypted keys
+- Surge Deployment
 
 
 ## License
