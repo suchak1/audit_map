@@ -4,6 +4,9 @@ import MapGL, {Marker, Popup,
 import ControlPanel from './ControlPanel';
 import Pin from './Pin';
 import PinInfo from './PinInfo';
+import { Button } from 'react-bootstrap';
+import { makeStyles } from '@material-ui/core/styles';
+
 import './Map.css';
 
 
@@ -26,6 +29,15 @@ const fullscreen = {
   padding: '10px',
 };
 
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  },
+}));
+
 
 class Map extends Component {
   constructor(props) {
@@ -42,9 +54,7 @@ class Map extends Component {
 
   _renderCityMarker = (ip, index) => {
     console.log(ip);
-    if(!ip || !ip.lat || !ip.long) {
-      return null;
-    }
+
     return (
       <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
         <Pin size={20} onClick={() => this.setState({popupInfo: ip})} />
@@ -62,10 +72,13 @@ class Map extends Component {
           anchor="top"
           longitude={popupInfo.long}
           latitude={popupInfo.lat}
+          offsetTop={5}
           closeOnClick={false}
+          closeButton={true}
           onClose={() => this.setState({popupInfo: null})}
         >
-          <PinInfo info={popupInfo} />
+        <div style={{paddingTop: 10}}>IP Address: 192.0.1.3</div>
+          <Button variant="danger">REVOKE ACCESS</Button>
         </Popup>
       )
     );
