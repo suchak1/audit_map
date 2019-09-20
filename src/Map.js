@@ -3,9 +3,8 @@ import MapGL, {Marker, Popup,
   NavigationControl, FullscreenControl} from 'react-map-gl';
 import ControlPanel from './ControlPanel';
 import Pin from './Pin';
-import PinInfo from './PinInfo';
+// import PinInfo from './PinInfo';
 import { Button } from 'react-bootstrap';
-import { makeStyles } from '@material-ui/core/styles';
 
 import './Map.css';
 
@@ -28,15 +27,6 @@ const fullscreen = {
   left: 0,
   padding: '10px',
 };
-
-const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-  input: {
-    display: 'none',
-  },
-}));
 
 
 class Map extends Component {
