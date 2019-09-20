@@ -66,12 +66,13 @@ npm start
 - Mapbox
   - button should change state
   - button should reflect state change (greyed out "REVOKED" or alt "GRANT")
+  - state change should trigger file policy change (revoke, grant access)
+  - change marker color based on row props data access
   - log should reflect state change
 
 - Virtru SDK Integration
   - log should have fields for user, city, and filename - (perhaps time too)
   - app state should record date/time, city, ip address, geolocation, filename, user
-  - change marker color based on row props data access
   - handle file upload (Maven Pro font)
   - use access json data
   - add mock data
