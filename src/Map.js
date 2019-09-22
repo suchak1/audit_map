@@ -85,7 +85,7 @@ class Map extends Component {
             variant={popupInfo['access'] === 'REVOKE' ? "success" : "danger"}
             onClick={() => this.handleClick(popupInfo)}
           >
-            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🟢" : "REVOKE ACCESS 🛑"}
+            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS ✅" : "REVOKE ACCESS 🛑"}
           </Button>
         </div>
         </Popup>
