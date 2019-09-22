@@ -82,10 +82,10 @@ class Map extends Component {
         </div>
         <div style={{display: "flex", justifyContent: "center"}}>
           <Button
-            variant={popupInfo['access'] === 'REVOKE' ? "success" : "danger"}
+            variant={popupInfo['access'] === 'REVOKE' ? "outline-success" : "outline-danger"}
             onClick={() => this.handleClick(popupInfo)}
           >
-            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS ✅" : "REVOKE ACCESS 🛑"}
+            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🟢" : "REVOKE ACCESS 🛑"}
           </Button>
         </div>
         </Popup>
