@@ -3,7 +3,9 @@ import MapGL, {Marker, Popup,
   NavigationControl, FullscreenControl} from 'react-map-gl';
 import ControlPanel from './ControlPanel';
 import Pin from './Pin';
-import PinInfo from './PinInfo';
+// import PinInfo from './PinInfo';
+import { Button } from 'react-bootstrap';
+
 import './Map.css';
 
 
@@ -42,15 +44,23 @@ class Map extends Component {
 
   _renderCityMarker = (ip, index) => {
     console.log(ip);
-    if(!ip || !ip.lat || !ip.long) {
-      return null;
-    }
+
     return (
       <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
         <Pin size={20} onClick={() => this.setState({popupInfo: ip})} />
       </Marker>
     );
   };
+
+  handleClick = (popupInfo) => {
+    const ip = popupInfo['ip'];
+    let copy = this.state.data;
+    copy[ip]['access'] = this.state.data[ip]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
+    this.setState({data: copy});
+    console.log(ip);
+    console.log(this.state.data[ip]['access']);
+    //this.state.ip_addrs[]
+  }
 
   _renderPopup() {
     const {popupInfo} = this.state;
@@ -60,12 +70,24 @@ class Map extends Component {
         <Popup
           tipSize={5}
           anchor="top"
-          longitude={popupInfo.long}
-          latitude={popupInfo.lat}
+          longitude={popupInfo['long']}
+          latitude={popupInfo['lat']}
+          offsetTop={5}
           closeOnClick={false}
+          closeButton={true}
           onClose={() => this.setState({popupInfo: null})}
         >
-          <PinInfo info={popupInfo} />
+        <div style={{paddingTop: 10, fontFamily: 'Maven Pro'}}>
+          IP Address: {popupInfo['ip']}
+        </div>
+        <div style={{display: "flex", justifyContent: "center"}}>
+          <Button
+            variant={popupInfo['access'] === 'REVOKE' ? "outline-success" : "outline-danger"}
+            onClick={() => this.handleClick(popupInfo)}
+          >
+            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🟢" : "REVOKE ACCESS 🛑"}
+          </Button>
+        </div>
         </Popup>
       )
     );
@@ -74,7 +96,6 @@ class Map extends Component {
   render() {
     const {viewport} = this.state;
     return (
-      <><div style = {{color: "white"}}>{this.state.ip_addrs}</div>
       <MapGL
         {...viewport}
         width = "100%"
@@ -101,7 +122,6 @@ class Map extends Component {
 
         <ControlPanel containerComponent={this.props.containerComponent} />
       </MapGL>
-      </>
     );
   }
 }

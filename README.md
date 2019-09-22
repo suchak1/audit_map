@@ -62,10 +62,7 @@ npm start
 
 
 ## TODO:
-- Add Revoke button
 - Mapbox
-  - button should change state
-  - button should reflect state change (greyed out "REVOKED" or alt "GRANT")
   - state change should trigger file policy change (revoke, grant access)
   - change marker color based on row props data access
   - log should reflect state change
@@ -82,6 +79,8 @@ npm start
   - add travis-ci encrypted keys
 - Surge Deployment
 
+- new functionality: (greyed out "REVOKED" after REVOKE and then GRANT on second open)
+- new functionality: loading button while sdk api calls are made
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md)

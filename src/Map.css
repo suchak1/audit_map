@@ -12,6 +12,10 @@
   padding: '10px';
 };
 
+.popup {
+  padding: '10px';
+  font-family: 'Maven Pro';
+}
 
 .import {
   background-color: #343332;
