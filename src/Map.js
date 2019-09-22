@@ -77,13 +77,17 @@ class Map extends Component {
           closeButton={true}
           onClose={() => this.setState({popupInfo: null})}
         >
-        <div style={{paddingTop: 10}}>IP Address: {popupInfo['ip']}</div>
+        <div style={{paddingTop: 10, fontFamily: 'Maven Pro'}}>
+          IP Address: {popupInfo['ip']}
+        </div>
+        <div style={{display: "flex", justifyContent: "center"}}>
           <Button
             variant={popupInfo['access'] === 'REVOKE' ? "success" : "danger"}
             onClick={() => this.handleClick(popupInfo)}
           >
-            {popupInfo['access'] === 'REVOKE' ? "GRANT" : "REVOKE"}
+            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🟢" : "REVOKE ACCESS 🛑"}
           </Button>
+        </div>
         </Popup>
       )
     );

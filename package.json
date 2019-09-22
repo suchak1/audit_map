@@ -18,6 +18,7 @@
     "react-scripts": "3.1.1",
     "react-virtualized": "^9.21.1",
     "react-window": "^1.8.5",
+    "typeface-maven-pro": "0.0.75",
     "typeface-ubuntu-mono": "0.0.72"
   },
   "scripts": {

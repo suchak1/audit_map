@@ -9,6 +9,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 require('dotenv').config();
 require("typeface-ubuntu-mono");
+require("typeface-maven-pro");
 
 ReactDOM.render(<><App /></>, document.getElementById('root'));
 
