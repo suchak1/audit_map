@@ -26,7 +26,7 @@ const pinStyleBlue = {
 
 
 const handleStyle = (access) => {
-  return access === 'GRANT' ? pinStyleBlue : pinStyleRed;
+  return access === 'GRANT' ? pinStyleGreen : pinStyleRed;
 }
 
 
