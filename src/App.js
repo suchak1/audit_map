@@ -56,6 +56,8 @@ class App extends Component {
       const entry = this.ip2geo(ip);
       // console.log(entry);
       geos[ip] = entry;
+      geos[ip]['access'] = 'GRANT';
+      geos[ip]['ip'] = ip;
     }
     return geos;
   }

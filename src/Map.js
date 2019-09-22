@@ -52,6 +52,16 @@ class Map extends Component {
     );
   };
 
+  handleClick = (popupInfo) => {
+    const ip = popupInfo['ip'];
+    let copy = this.state.data;
+    copy[ip]['access'] = this.state.data[ip]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
+    this.setState({data: copy});
+    console.log(ip);
+    console.log(this.state.data[ip]['access']);
+    //this.state.ip_addrs[]
+  }
+
   _renderPopup() {
     const {popupInfo} = this.state;
 
@@ -60,15 +70,20 @@ class Map extends Component {
         <Popup
           tipSize={5}
           anchor="top"
-          longitude={popupInfo.long}
-          latitude={popupInfo.lat}
+          longitude={popupInfo['long']}
+          latitude={popupInfo['lat']}
           offsetTop={5}
           closeOnClick={false}
           closeButton={true}
           onClose={() => this.setState({popupInfo: null})}
         >
-        <div style={{paddingTop: 10}}>IP Address: 192.0.1.3</div>
-          <Button variant="danger">REVOKE ACCESS</Button>
+        <div style={{paddingTop: 10}}>IP Address: {popupInfo['ip']}</div>
+          <Button
+            variant={popupInfo['access'] === 'REVOKE' ? "success" : "danger"}
+            onClick={() => this.handleClick(popupInfo)}
+          >
+            {popupInfo['access'] === 'REVOKE' ? "GRANT" : "REVOKE"}
+          </Button>
         </Popup>
       )
     );
@@ -77,7 +92,6 @@ class Map extends Component {
   render() {
     const {viewport} = this.state;
     return (
-      <><div style = {{color: "white"}}>{this.state.ip_addrs}</div>
       <MapGL
         {...viewport}
         width = "100%"
@@ -104,7 +118,6 @@ class Map extends Component {
 
         <ControlPanel containerComponent={this.props.containerComponent} />
       </MapGL>
-      </>
     );
   }
 }
