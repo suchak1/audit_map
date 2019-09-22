@@ -6,22 +6,40 @@ const ICON =
   0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,
   7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9C20.1,15.8,20.2,15.8,20.2,15.7z`;
 
-const pinStyle = {
+const pinStyleRed = {
   cursor: 'pointer',
   fill: '#d00',
   stroke: 'none'
 };
 
+const pinStyleGreen = {
+  cursor: 'pointer',
+  fill: '#16C60C',
+  stroke: 'none'
+};
+
+const pinStyleBlue = {
+  cursor: 'pointer',
+  fill: '#4481F8',
+  stroke: 'none'
+};
+
+
+const handleStyle = (access) => {
+  return access === 'GRANT' ? pinStyleBlue : pinStyleRed;
+}
+
+
 export default class Pin extends PureComponent {
   render() {
-    const {size = 20, onClick} = this.props;
+    const {size = 20, onClick, access} = this.props;
 
     return (
       <svg
         height={size}
         viewBox="0 0 24 24"
         style={{
-          ...pinStyle,
+          ...handleStyle(access),
           transform: `translate(${-size / 2}px,${-size}px)`
         }}
         onClick={onClick}
