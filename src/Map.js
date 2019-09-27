@@ -47,7 +47,7 @@ class Map extends Component {
 
     return (
       <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
-        <Pin size={20} onClick={() => this.setState({popupInfo: ip})} />
+        <Pin size={20} access={ip['access']} onClick={() => this.setState({popupInfo: ip})} />
       </Marker>
     );
   };
@@ -82,10 +82,10 @@ class Map extends Component {
         </div>
         <div style={{display: "flex", justifyContent: "center"}}>
           <Button
-            variant={popupInfo['access'] === 'REVOKE' ? "outline-success" : "outline-danger"}
+            variant={popupInfo['access'] === 'REVOKE' ? "outline-primary" : "outline-danger"}
             onClick={() => this.handleClick(popupInfo)}
           >
-            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🟢" : "REVOKE ACCESS 🛑"}
+            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🔵" : "REVOKE ACCESS 🛑"}
           </Button>
         </div>
         </Popup>

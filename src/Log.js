@@ -23,7 +23,7 @@ class Log extends Component {
   };
 
   rowRenderer = ({ index, isScrolling, key, style }) => {
-    const accessColor = this.props.data[index].access === 'GRANT' ? 'lime' : 'red';
+    const accessColor = this.props.data[index].access === 'GRANT' ? '#4481F8' : '#DC3545';
     return (
       <div key={key} style={style}>
       ACTION: <span style={{color: accessColor}}>{this.props.data[index].access.padEnd(9, '.')}</span> decrypt
