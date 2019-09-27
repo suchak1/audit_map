@@ -18,11 +18,11 @@ const pinStyleGreen = {
   stroke: 'none'
 };
 
-const pinStyleBlue = {
-  cursor: 'pointer',
-  fill: '#4481F8',
-  stroke: 'none'
-};
+// const pinStyleBlue = {
+//   cursor: 'pointer',
+//   fill: '#4481F8',
+//   stroke: 'none'
+// };
 
 
 const handleStyle = (access) => {
