@@ -17,7 +17,7 @@ class Log extends Component {
       return str;
     }
     else if(str.length < padNum) {
-      return str.padEnd(padNum, '.');
+      return str.padEnd(padNum, ' ');
     }
     return str.substring(0, padNum-3)+'...';
   };
@@ -25,10 +25,14 @@ class Log extends Component {
   rowRenderer = ({ index, isScrolling, key, style }) => {
     const accessColor = this.props.data[index].access === 'GRANT' ? '#4481F8' : '#DC3545';
     return (
-      <div key={key} style={style}>
-      ACTION: <span style={{color: accessColor}}>{this.props.data[index].access.padEnd(9, '.')}</span> decrypt
-      &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "darkgray"}}>{this.padWord(this.props.data[index].email, 25)}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{color: "peachpuff"}}>{this.padWord(this.props.data[index].file, 25)}</span>
+      <div key={index} style={style}>
+        <div>
+          ACTION: <span style={{color: accessColor}}>{this.props.data[index].access.padEnd(9, ' ')}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "darkgray"}}>{this.padWord(this.props.data[index].email, 25)}</span>
+        </div>
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{color: "peachpuff"}}>{this.padWord(this.props.data[index].file, 25)}</span>
+        </div>
       </div>
     );
   };
@@ -69,8 +73,9 @@ class Log extends Component {
                   rowCount={this.props.data.length}
                   width={width}
                   height={height}
-                  rowHeight={rowHeight}
+                  rowHeight={rowHeight*2}
                   rowRenderer={this.rowRenderer}
+                  scrollToRow={this.props.data.length}
                   overscanRowCount={100}
                 />
               )}
