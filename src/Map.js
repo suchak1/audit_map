@@ -37,7 +37,6 @@ class Map extends Component {
         zoom: zoom
       },
       popupInfo: null,
-      data: this.props.data
     };
   }
 
@@ -52,15 +51,6 @@ class Map extends Component {
     );
   };
 
-  handleClick = (popupInfo) => {
-    const ip = popupInfo['ip'];
-    let copy = this.state.data;
-    copy[ip]['access'] = this.state.data[ip]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
-    this.setState({data: copy});
-    console.log(ip);
-    console.log(this.state.data[ip]['access']);
-    //this.state.ip_addrs[]
-  }
 
   _renderPopup() {
     const {popupInfo} = this.state;
@@ -83,7 +73,7 @@ class Map extends Component {
         <div style={{display: "flex", justifyContent: "center"}}>
           <Button
             variant={popupInfo['access'] === 'REVOKE' ? "outline-primary" : "outline-danger"}
-            onClick={() => this.handleClick(popupInfo)}
+            onClick={() => this.props.flipAccess(popupInfo['ip'])}
           >
             {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🔵" : "REVOKE ACCESS 🛑"}
           </Button>
@@ -106,9 +96,9 @@ class Map extends Component {
         onViewportChange={viewport => this.setState({viewport})}
       >
 
-        {console.log(this.state.data)}
-        {Object.keys(this.state.data).map((key, index) =>
-          this._renderCityMarker(this.state.data[key], key))}
+        {console.log(this.props.data)}
+        {Object.keys(this.props.data).map((key, index) =>
+          this._renderCityMarker(this.props.data[key], key))}
         {this._renderPopup()}
 
 
