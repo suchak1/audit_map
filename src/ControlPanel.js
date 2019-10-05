@@ -8,7 +8,7 @@ export default class ControlPanel extends PureComponent {
 
     return (
       <Container>
-          <button className = "import">Import File ↗</button>
+          <button className = "import">Encrypt File ↗</button>
       </Container>
     );
   }
