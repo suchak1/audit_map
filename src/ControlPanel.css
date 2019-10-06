@@ -1,0 +1,38 @@
+.upload-encrypt-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.encrypt {
+  font-family: "Maven Pro";
+  border: 2px solid gray;
+  color: #4481F8;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.encrypt:hover {
+  font-family: "Maven Pro";
+  border: 2px solid gray;
+  color: black;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+button:focus {outline:0;}
+
+
+.upload-encrypt-wrapper input[type=file] {
+  font-size: 5.5em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}

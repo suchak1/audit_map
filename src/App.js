@@ -13,9 +13,13 @@ class App extends Component {
 
     this.state = {
       ip_addrs: this.updateGeos(ips),
-      updates: []
+      updates: [],
+      file: '',
+      emails: []
     };
   }
+
+  encrypt
 
   flipAccess = (ip) => {
     let copy = this.state.ip_addrs;
