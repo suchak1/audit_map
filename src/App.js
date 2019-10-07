@@ -75,7 +75,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.ip_addrs);
-    return (<><Map flipAccess = {this.flipAccess} data = {this.state.ip_addrs}/><Log data = {this.state.updates}/></>
+    return (<div styles={{fontFamily: "Maven Pro"}}><Map flipAccess = {this.flipAccess} data = {this.state.ip_addrs}/><Log data = {this.state.updates}/></div>
     );
   }
 }

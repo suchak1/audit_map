@@ -1,7 +1,15 @@
+.field {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
 .upload-encrypt-wrapper {
   position: relative;
   overflow: hidden;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items:center;
 }
 
 .encrypt {
