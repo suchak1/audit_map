@@ -13,9 +13,13 @@ class App extends Component {
 
     this.state = {
       ip_addrs: this.updateGeos(ips),
-      updates: []
+      updates: [],
+      file: '',
+      emails: []
     };
   }
+
+  encrypt
 
   flipAccess = (ip) => {
     let copy = this.state.ip_addrs;
@@ -71,7 +75,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.ip_addrs);
-    return (<><Map flipAccess = {this.flipAccess} data = {this.state.ip_addrs}/><Log data = {this.state.updates}/></>
+    return (<div styles={{fontFamily: "Maven Pro"}}><Map flipAccess = {this.flipAccess} data = {this.state.ip_addrs}/><Log data = {this.state.updates}/></div>
     );
   }
 }
