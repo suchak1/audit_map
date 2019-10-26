@@ -9,30 +9,41 @@ export default class ControlPanel extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      emails: [],
       file: null
     }
   }
 
+  setEmails = (emails) => {
+    const addresses = emails.split(",").map(email => email.trim());
+    this.setState({emails: addresses});
+  }
 
-  handleClick = () => {console.log("hi")};
+
+  handleClick = () => {console.log(this.state)};
 
   render() {
     const Container = this.props.containerComponent || defaultContainer;
-    const inputRef = React.createRef();
+    const encryptRef = React.createRef();
+    const emailRef = React.createRef();
 
     return (
       <Container>
         <span>
-        <div className="field"><input type="text" id="name" name="name" required size="50"/></div>
+        <div className="field">
+          <input fontFamily='Maven Pro' type="text" id="name" name="name" ref={emailRef}
+            required size="50" onChange={(e) => {this.setEmails(e.target.value)}}
+            placeholder="Enter emails with whom to share file (sep. by commas)"/>
+        </div>
         <div className="upload-encrypt-wrapper">
             <button className="encrypt" onClick={this.handleClick()}>Encrypt File ↗</button>
               <input
               id="file_input_file"
               className="none"
               type="file"
-              ref={inputRef}
+              ref={encryptRef}
               onChange={(e) => {
-                if(inputRef.current.files.length) {
+                if(encryptRef.current.files.length) {
                   const reader = new FileReader();
                   reader.onload = () => {
                     const file = reader.result;
@@ -45,10 +56,10 @@ export default class ControlPanel extends PureComponent {
                       }
                       const policy = new Virtru.PolicyBuilder().build();
                       const client = new Virtru.Client({email});
-                      console.log("got this far");
+                      console.log(this.state.emails);
                       const encryptParams = new Virtru.EncryptParamsBuilder()
                       .withArrayBufferSource(file)
-                      .withUsersWithAccess(['suchak.krish@gmail.com'])
+                      .withUsersWithAccess(this.state.emails)
                       .withPolicy(policy)
                       .build();
 
@@ -58,12 +69,15 @@ export default class ControlPanel extends PureComponent {
                     virtru();
                     this.setState({file: file})
                   }
-                  let file = inputRef.current.files[0];
+                  let file = encryptRef.current.files[0];
+                  this.setState({file: file.name});
                   reader.readAsArrayBuffer(file);
                   console.log(file);
                   //this.setState({file: file});
                   // require user to store file in directory
                   // only record filename, pass filename to node.js file + e
+                  // write json file after encrypting file - first level is encrypt paramas index then ip, users, filename, etc
+                  // data structure in react app should be list of dicts encrypt params
                 }
               }}
             />
