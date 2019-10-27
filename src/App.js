@@ -46,7 +46,7 @@ class App extends Component {
         logUpdates.push({
             ip: ip,
             access: flip,
-            email: faker.internet.email(),
+            email: [faker.internet.email()],
             file: faker.system.fileName(),
             key: logUpdates.length
         });

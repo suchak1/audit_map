@@ -26,7 +26,7 @@ class Log extends Component {
             <div key={index} style={style}>
                 <div>
                     ACTION: <span style={{color: accessColor}}>{this.props.data[index].access.padEnd(9, ' ')}</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "darkgray"}}>{this.padWord(this.props.data[index].email, 25)}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "darkgray"}}>{this.padWord('[' + this.props.data[index].email.join(', ') + ']', 75)}</span>
         </div>
         <div>
             &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{color: "peachpuff"}}>{this.padWord(this.props.data[index].file, 25)}</span>
