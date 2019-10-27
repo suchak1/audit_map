@@ -26,6 +26,8 @@ class App extends Component {
         for(let field in geo) {
             entry[field] = geo[field];
         }
+        entry.lat = geo.lat;
+        entry.long = geo.long;
 
         copy[key] = entry;
         logUpdates.push({
@@ -62,26 +64,26 @@ class App extends Component {
         }))
     }
 
-    ip2geo = (ip) => {
+    ip2geo = async (ip) => {
         let entry = {};
 
-        if (process.env.REACT_APP_DEBUG === "true" || !process.env.REACT_APP_IPSTACK) {
-            console.log('http://ip-api.com/json/' + ip);
-            fetch('http://ip-api.com/json/' + ip)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                // entry['lat'] = data.lat;
-                // entry['long'] = data.lon;
-                // entry['city'] = data.city;
-                // entry['region'] = data.regionName;
-                // entry['region code'] = data.region;
-                // entry['country'] = data.country;
-                // entry['country code'] = data.countryCode;
-            });
-            console.log(entry);
-            console.log("ip-api");
-        } else {
+        // if (process.env.REACT_APP_DEBUG === "true" || !process.env.REACT_APP_IPSTACK) {
+        //     console.log('https://ipapi.co/' + ip + '/json/');
+        //     fetch('https://ipapi.co/' + ip + '/json/')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         entry['lat'] = data.latitude;
+        //         entry['long'] = data.longitude;
+        //         entry['city'] = data.city;
+        //         entry['region'] = data.region;
+        //         entry['region code'] = data.region_code;
+        //         entry['country'] = data.country_name;
+        //         entry['country code'] = data.country;
+        //     });
+        //     console.log(entry);
+        //     console.log("ip-api");
+        // } else {
             fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
             process.env.REACT_APP_IPSTACK)
             .then(response => response.json())
@@ -96,8 +98,8 @@ class App extends Component {
             });
             console.log(entry);
             console.log('ipstack');
-        }
-        return entry;
+        // }
+        return await entry;
     }
 
     updateGeos = (ips) => {
