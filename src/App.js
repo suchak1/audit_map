@@ -4,7 +4,7 @@ import './Map.css';
 import Log from './Log';
 import faker from 'faker';
 
-var ips = ['69.243.229.184', '96.150.51.147'];
+const ips = ['69.243.229.184', '96.150.51.147'];
 
 
 class App extends Component {
@@ -43,7 +43,15 @@ class App extends Component {
             policies: copy,
             updates: logUpdates
         }));
-
+//         fs.readdirSync('./').forEach(file => {
+//   console.log(file);
+// });
+        // fs.appendFile('encrypted.html', 'hey', (err) => {
+        //     if(err) {
+        //         throw err;
+        //     }
+        //     console.log('Saved!');
+        // });
     }
 
     flipAccess = (ip) => {
