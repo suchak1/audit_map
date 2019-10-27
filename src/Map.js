@@ -43,6 +43,9 @@ import MapGL, {Marker, Popup,
 
         _renderCityMarker = (ip, index) => {
             console.log(ip);
+            if(!ip || !ip.lat || !ip.long) {
+                return null;
+            }
 
             return (
                 <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
@@ -99,6 +102,7 @@ import MapGL, {Marker, Popup,
                     {console.log(this.props.data)}
                     {Object.keys(this.props.data).map((key, index) =>
                         this._renderCityMarker(this.props.data[key], key))}
+
                         {this._renderPopup()}
 
 

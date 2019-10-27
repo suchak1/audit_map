@@ -21,6 +21,11 @@ class App extends Component {
     addPolicy = (key, entry) => {
         let copy = this.state.policies;
         let logUpdates = this.state.updates;
+        const geo = this.ip2geo(entry.ip);
+
+        for(let field in geo) {
+            entry[field] = geo[field];
+        }
 
         copy[key] = entry;
         logUpdates.push({
@@ -28,6 +33,7 @@ class App extends Component {
             access: entry.access,
             email: entry.users,
             file: entry.file,
+            location: geo.city +', ' + geo.country,
             key: logUpdates.length
         });
 
@@ -57,24 +63,38 @@ class App extends Component {
     }
 
     ip2geo = (ip) => {
-        if (process.env.REACT_APP_DEBUG === "true") {
-            return {
-                'lat': Number(faker.address.latitude()),
-                'long': Number(faker.address.longitude())
-            };
-        } else {
-            let entry = {};
+        let entry = {};
 
+        if (process.env.REACT_APP_DEBUG === "true" || !process.env.REACT_APP_IPSTACK) {
+            fetch('https://ipapi.co/' + ip + '/json/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                entry['lat'] = data.latitude;
+                entry['long'] = data.longitude;
+                entry['city'] = data.city;
+                entry['region'] = data.region;
+                entry['region code'] = data.region_code;
+                entry['country'] = data.country_name;
+                entry['country code'] = data.country;
+            });
+
+        } else {
             fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
             process.env.REACT_APP_IPSTACK)
             .then(response => response.json())
             .then(data => {
                 entry['lat'] = data.latitude;
                 entry['long'] = data.longitude;
+                entry['city'] = data.city;
+                entry['region'] = data.region_name;
+                entry['region code'] = data.region_code;
+                entry['country'] = data.country_name;
+                entry['country code'] = data.country_code;
             });
-
-            return entry;
         }
+        console.log(entry);
+        return entry;
     }
 
     updateGeos = (ips) => {
@@ -82,7 +102,6 @@ class App extends Component {
         for (var i in ips) {
             const ip = ips[i];
             const entry = this.ip2geo(ip);
-            // console.log(entry);
             geos[ip] = entry;
             geos[ip]['access'] = 'GRANT';
             geos[ip]['ip'] = ip;
@@ -96,6 +115,7 @@ class App extends Component {
             <div styles={{fontFamily: "Maven Pro"}}>
                 <Map flipAccess = {this.flipAccess}
                     addPolicy = {this.addPolicy}
+                    ip2geo = {this.ip2geo}
                     data = {this.state.ip_addrs}/>
                 <Log data = {this.state.updates}/></div>
             );
