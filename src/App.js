@@ -23,6 +23,7 @@ class App extends Component {
         let logUpdates = this.state.updates;
         const geo = this.ip2geo(entry.ip);
 
+        // eslint-disable-next-line
         for(let field in geo) {
             console.log(field);
             entry[field] = geo[field];

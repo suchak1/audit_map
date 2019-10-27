@@ -44,11 +44,8 @@ import MapGL, {Marker, Popup,
         _renderCityMarker = (ip, index) => {
             console.log(ip);
             if(!ip || !ip.lat || !ip.long) {
-                if(!this.state.loaded)
-                this.setState({loaded: !this.state.loaded});
                 return null;
             }
-
 
             return (
                 <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
