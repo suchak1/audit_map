@@ -24,6 +24,7 @@ class App extends Component {
         const geo = this.ip2geo(entry.ip);
 
         for(let field in geo) {
+            console.log(field);
             entry[field] = geo[field];
         }
 

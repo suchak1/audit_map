@@ -23,16 +23,31 @@ class Log extends Component {
     rowRenderer = ({ index, isScrolling, key, style }) => {
         const accessColor = this.props.data[index].access === 'GRANT' ? '#4481F8' : '#DC3545';
         return (
-            <div key={index} style={style}>
+            <div key={`row-${index}`} style={style}>
                 <div>
-                    ACTION: <span style={{color: accessColor}}>{this.props.data[index].access.padEnd(9, ' ')}</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;USER: <span style={{color: "darkgray"}}>{this.padWord('[' + this.props.data[index].email.join(', ') + ']', 75)}</span>
+                    ACTION:
+                    <span style={{color: accessColor}}>
+                        {this.props.data[index].access.padEnd(9, ' ')}
+                    </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    USER(S):
+                    <span style={{color: "darkgray"}}>
+                        {this.padWord('[' + this.props.data[index].email.join(', ') + ']', 75)}
+                    </span>
+                </div>
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    FILE: <span style={{color: "peachpuff"}}>
+                    {this.padWord(this.props.data[index].file, 25)}
+                </span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                LOCATION:
+                <span style={{color: "darkgray"}}>
+                    {this.padWord('[' + this.props.data[index].email.join(', ') + ']', 75)}
+                </span>
+            </div>
         </div>
-        <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;FILE: <span style={{color: "peachpuff"}}>{this.padWord(this.props.data[index].file, 25)}</span>
-    </div>
-</div>
-);
+    );
 };
 
 binary = (str) => {
