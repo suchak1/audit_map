@@ -26,8 +26,6 @@ class App extends Component {
         for(let field in geo) {
             entry[field] = geo[field];
         }
-        entry.lat = geo.lat;
-        entry.long = geo.long;
 
         copy[key] = entry;
         logUpdates.push({
@@ -64,26 +62,24 @@ class App extends Component {
         }))
     }
 
-    ip2geo = async (ip) => {
+    ip2geo = (ip) => {
         let entry = {};
 
-        // if (process.env.REACT_APP_DEBUG === "true" || !process.env.REACT_APP_IPSTACK) {
-        //     console.log('https://ipapi.co/' + ip + '/json/');
-        //     fetch('https://ipapi.co/' + ip + '/json/')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         entry['lat'] = data.latitude;
-        //         entry['long'] = data.longitude;
-        //         entry['city'] = data.city;
-        //         entry['region'] = data.region;
-        //         entry['region code'] = data.region_code;
-        //         entry['country'] = data.country_name;
-        //         entry['country code'] = data.country;
-        //     });
-        //     console.log(entry);
-        //     console.log("ip-api");
-        // } else {
+        if (process.env.REACT_APP_DEBUG === "true" || !process.env.REACT_APP_IPSTACK) {
+            fetch('https://ipapi.co/' + ip + '/json/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                entry['lat'] = data.latitude;
+                entry['long'] = data.longitude;
+                entry['city'] = data.city;
+                entry['region'] = data.region;
+                entry['region code'] = data.region_code;
+                entry['country'] = data.country_name;
+                entry['country code'] = data.country;
+            });
+
+        } else {
             fetch('http://api.ipstack.com/'+ ip +'?access_key=' +
             process.env.REACT_APP_IPSTACK)
             .then(response => response.json())
@@ -96,20 +92,16 @@ class App extends Component {
                 entry['country'] = data.country_name;
                 entry['country code'] = data.country_code;
             });
-            console.log(entry);
-            console.log('ipstack');
-        // }
-        return await entry;
+        }
+        console.log(entry);
+        return entry;
     }
 
     updateGeos = (ips) => {
         let geos = {};
         for (var i in ips) {
             const ip = ips[i];
-            const geo = this.ip2geo(ip);
-            const entry = {};
-            entry.lat = geo.lat;
-            entry.long = geo.long;
+            const entry = this.ip2geo(ip);
             geos[ip] = entry;
             geos[ip]['access'] = 'GRANT';
             geos[ip]['ip'] = ip;
@@ -123,6 +115,7 @@ class App extends Component {
             <div styles={{fontFamily: "Maven Pro"}}>
                 <Map flipAccess = {this.flipAccess}
                     addPolicy = {this.addPolicy}
+                    ip2geo = {this.ip2geo}
                     data = {this.state.ip_addrs}/>
                 <Log data = {this.state.updates}/></div>
             );
