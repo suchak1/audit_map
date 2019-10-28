@@ -3,6 +3,7 @@ import Map from './Map';
 import './Map.css';
 import Log from './Log';
 import faker from 'faker';
+import FileSaver from 'file-saver';
 
 const ips = ['69.243.229.184', '96.150.51.147'];
 
@@ -43,15 +44,13 @@ class App extends Component {
             policies: copy,
             updates: logUpdates
         }));
-//         fs.readdirSync('./').forEach(file => {
-//   console.log(file);
-// });
-        // fs.appendFile('encrypted.html', 'hey', (err) => {
-        //     if(err) {
-        //         throw err;
-        //     }
-        //     console.log('Saved!');
-        // });
+    }
+
+    writeFile = () => {
+        const data = JSON.stringify(this.state, null, 4);
+        const blob = new Blob([data], {type: 'application/json'});
+        console.log(blob);
+        FileSaver.saveAs(blob, 'history.json');
     }
 
     flipAccess = (ip) => {
@@ -125,9 +124,10 @@ class App extends Component {
             <div styles={{fontFamily: "Maven Pro"}}>
                 <Map flipAccess = {this.flipAccess}
                     addPolicy = {this.addPolicy}
+                    writeFile = {this.writeFile}
                     ip2geo = {this.ip2geo}
                     data = {this.state.ip_addrs}/>
-                <Log data = {this.state.updates}/></div>
+                <Log data = {this.state.updates} writeFile = {this.writeFile}/> </div>
             );
         }
     }

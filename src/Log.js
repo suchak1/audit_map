@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {List, AutoSizer} from "react-virtualized";
+import { Button } from 'react-bootstrap';
+
 import './Log.css';
 
 const rowHeight = 30;
@@ -79,6 +81,9 @@ binary = (str) => {
                 <div className="underline">
                     {"Logs"}
                 </div>
+                <span className="save">
+                <Button variant = "primary" onClick = {this.props.writeFile}> Save JSON </Button>
+                </span>
                 <div className="list">
                     <AutoSizer>
                         {({height, width}) => (

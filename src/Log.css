@@ -79,12 +79,20 @@ a {
   align-items: baseline;
 }
 
+.save {
+    text-align: right;
+    align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-family: 'Ubuntu Mono';
+}
 
 .underline {
   color: #4481F8;
   padding-left: 50%;
   position: relative;
-  text-align: center;
+  text-align: right;
   display: inline-block;
   font-family: 'Ubuntu Mono', Courier, serif;
   font-size: inherit;

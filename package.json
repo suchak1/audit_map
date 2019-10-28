@@ -12,6 +12,7 @@
     "browserify-fs": "^1.0.0",
     "dotenv": "^8.1.0",
     "faker": "^4.1.0",
+    "file-saver": "^2.0.2",
     "level-filesystem": "^1.2.0",
     "promisify-child-process": "^3.1.1",
     "public-ip": "^3.2.0",
