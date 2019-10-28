@@ -74,17 +74,15 @@ a {
 
 .header {
   padding-left: 10%;
+  padding-right: 2%;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-content: center;
   align-items: baseline;
 }
 
 .save {
-    text-align: right;
-    align: right;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
     font-family: 'Ubuntu Mono';
 }
 

@@ -5,38 +5,35 @@ import Log from './Log';
 import FileSaver from 'file-saver';
 import history from './history';
 
-// const ips = ['69.243.229.184', '96.150.51.147'];
-
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            policies: this.updateGeos(history.policies),
-            updates: history.updates,
+            policies: this.updatePolicies(history.policies),
+            log: this.updateLog(history.log),
         };
     }
 
     addPolicy = (key, entry) => {
         let copy = this.state.policies;
-        let logUpdates = this.state.updates;
+        let updates = this.state.log;
         const geo = this.ip2geo(entry.ip);
 
         entry['loc'] = geo;
         copy[key] = entry;
-        logUpdates.push({
+        updates.push({
             ip: entry.ip,
             access: entry.access,
             email: entry.users,
             file: entry.file,
-            location: geo.city +', ' + geo.country,
-            key: logUpdates.length
+            key: key
         });
 
         this.setState(prevState => ({
             policies: copy,
-            updates: logUpdates
+            log: updates
         }));
     }
 
@@ -49,19 +46,19 @@ class App extends Component {
 
     flipAccess = (key) => {
         let copy = this.state.policies;
-        let logUpdates = this.state.updates;
+        let updates = this.state.log;
         const flip = copy[key]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
         copy[key]['access'] = flip;
-        logUpdates.push({
+        updates.push({
             ip: copy[key]['ip'],
             access: flip,
             email: copy[key]['users'],
             file: copy[key]['file'],
-            key: logUpdates.length
+            key: key
         });
         this.setState(prevState => ({
             policies: copy,
-            updates: logUpdates
+            updates: updates
         }))
     }
 
@@ -100,15 +97,37 @@ class App extends Component {
         return entry;
     }
 
-    updateGeos = (policies) => {
+    updatePolicies = (policies) => {
         for(var key in policies) {
-            if('ip' in policies[key] && !('loc' in policies[key])) {
+            if('ip' in policies[key] &&
+            !!policies[key]['ip'] &&
+            (!('loc' in policies[key]) || !policies[key]['loc']['lat'])) {
                 const ip = policies[key]['ip'];
                 const loc = this.ip2geo(ip);
                 policies[key]['loc'] = loc;
             }
         }
         return policies;
+    }
+
+    updateLog = (log) => {
+        for(var idx in log) {
+            let entry = log[idx];
+            if('ip' in entry &&
+            !!entry['ip'] &&
+            !('loc' in entry)) {
+                const policies = history.policies;
+                if('loc' in policies[entry['key']] && !!policies[entry['key']]['loc']['lat']) {
+                    entry['loc'] = policies[entry['key']]['loc'];
+                } else {
+                    const ip = entry['ip'];
+                    const loc = this.ip2geo(ip);
+                    entry['loc'] = loc;
+                }
+                log[idx] = entry;
+            }
+        }
+        return log
     }
 
     render() {
@@ -120,7 +139,7 @@ class App extends Component {
                     writeFile = {this.writeFile}
                     ip2geo = {this.ip2geo}
                     data = {this.state.policies}/>
-                <Log data = {this.state.updates} writeFile = {this.writeFile}/> </div>
+                <Log data = {this.state.log} writeFile = {this.writeFile}/> </div>
             );
         }
     }

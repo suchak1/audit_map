@@ -31,46 +31,38 @@
             }
         }
     },
-    "ip_addrs": {
-        "69.243.229.184": {
-            "access": "GRANT",
-            "ip": "69.243.229.184",
-            "lat": 30.5218,
-            "long": -84.2626,
-            "city": "Tallahassee",
-            "region": "Florida",
-            "region code": "FL",
-            "country": "United States",
-            "country code": "US"
-        },
-        "96.150.51.147": {
-            "access": "GRANT",
-            "ip": "96.150.51.147",
-            "lat": 41.8483,
-            "long": -87.6517,
-            "city": "Chicago",
-            "region": "Illinois",
-            "region code": "IL",
-            "country": "United States",
-            "country code": "US"
-        }
-    },
-    "updates": [
+    "log": [
         {
             "ip": "73.50.211.230",
             "access": "GRANT",
             "email": [],
             "file": "voters.csv",
-            "location": "undefined, undefined",
-            "key": 0
+            "key": "d69a27a1-87cb-4ffe-b2d2-48e602b8afb3",
+            "loc": {
+                "lat": 41.8196,
+                "long": -87.6126,
+                "city": "Chicago",
+                "region": "Illinois",
+                "region code": "IL",
+                "country": "United States",
+                "country code": "US"
+            }
         },
         {
             "ip": "73.50.211.230",
             "access": "GRANT",
             "email": [],
             "file": "DataSciHW1.pdf",
-            "location": "undefined, undefined",
-            "key": 1
+            "key": "8963eb43-29b7-4b23-94fb-fdd1f5e97cbc",
+            "loc": {
+                "lat": 41.8196,
+                "long": -87.6126,
+                "city": "Chicago",
+                "region": "Illinois",
+                "region code": "IL",
+                "country": "United States",
+                "country code": "US"
+            }
         }
     ]
 }
