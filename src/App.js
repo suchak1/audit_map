@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Map from './Map';
 import './Map.css';
 import Log from './Log';
-import faker from 'faker';
 import FileSaver from 'file-saver';
 import history from './history';
 
@@ -15,7 +14,6 @@ class App extends Component {
 
         this.state = {
             policies: this.updateGeos(history.policies),
-            ip_addrs: history.ip_addrs,
             updates: history.updates,
         };
     }
@@ -25,11 +23,7 @@ class App extends Component {
         let logUpdates = this.state.updates;
         const geo = this.ip2geo(entry.ip);
 
-        for(var field in geo) {
-            console.log(field);
-            entry[field] = geo[field];
-        }
-
+        entry['loc'] = geo;
         copy[key] = entry;
         logUpdates.push({
             ip: entry.ip,
@@ -53,20 +47,20 @@ class App extends Component {
         FileSaver.saveAs(blob, 'history.json');
     }
 
-    flipAccess = (ip) => {
-        let copy = this.state.ip_addrs;
+    flipAccess = (key) => {
+        let copy = this.state.policies;
         let logUpdates = this.state.updates;
-        const flip = copy[ip]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
-        copy[ip]['access'] = flip;
+        const flip = copy[key]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
+        copy[key]['access'] = flip;
         logUpdates.push({
-            ip: ip,
+            ip: copy[key]['ip'],
             access: flip,
-            email: [faker.internet.email()],
-            file: faker.system.fileName(),
+            email: copy[key]['users'],
+            file: copy[key]['file'],
             key: logUpdates.length
         });
         this.setState(prevState => ({
-            ip_addrs: copy,
+            policies: copy,
             updates: logUpdates
         }))
     }
@@ -118,14 +112,14 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.ip_addrs);
+        console.log(this.state.policies);
         return (
             <div styles={{fontFamily: "Maven Pro"}}>
                 <Map flipAccess = {this.flipAccess}
                     addPolicy = {this.addPolicy}
                     writeFile = {this.writeFile}
                     ip2geo = {this.ip2geo}
-                    data = {this.state.ip_addrs}/>
+                    data = {this.state.policies}/>
                 <Log data = {this.state.updates} writeFile = {this.writeFile}/> </div>
             );
         }

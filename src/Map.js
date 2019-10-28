@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import MapGL, {Marker, Popup, NavigationControl, FullscreenControl} from 'react-map-gl';
 import ControlPanel from './ControlPanel';
 import Pin from './Pin';
-// import PinInfo from './PinInfo';
 import { Button } from 'react-bootstrap';
-
 import './Map.css';
 
 
@@ -40,15 +38,15 @@ class Map extends Component {
     }
 
 
-    _renderCityMarker = (ip, index) => {
-        console.log(ip);
-        if(!ip || !ip.lat || !ip.long) {
+    _renderCityMarker = (entry, key) => {
+        const loc = entry['loc'];
+        if(!entry['ip'] || !loc.lat || !loc.long) {
             return null;
         }
 
         return (
-            <Marker key={`marker-${index}`} longitude={ip.long} latitude={ip.lat}>
-                <Pin size={20} access={ip['access']} onClick={() => this.setState({popupInfo: ip})} />
+            <Marker key={`marker-${key}`} longitude={loc.long} latitude={loc.lat}>
+                <Pin size={20} access={entry['access']} onClick={() => this.setState({popupInfo: {key: key, entry: entry}})} />
             </Marker>
         );
     };
@@ -62,22 +60,22 @@ class Map extends Component {
                 <Popup
                     tipSize={5}
                     anchor="top"
-                    longitude={popupInfo['long']}
-                    latitude={popupInfo['lat']}
+                    longitude={popupInfo['entry']['loc']['long']}
+                    latitude={popupInfo['entry']['loc']['lat']}
                     offsetTop={5}
                     closeOnClick={false}
                     closeButton={true}
                     onClose={() => this.setState({popupInfo: null})}
                     >
                     <div style={{paddingTop: 10, fontFamily: 'Maven Pro'}}>
-                        IP Address: {popupInfo['ip']}
+                        IP Address: {popupInfo['entry']['ip']}
                     </div>
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Button
-                            variant={popupInfo['access'] === 'REVOKE' ? "outline-primary" : "outline-danger"}
-                            onClick={() => this.props.flipAccess(popupInfo['ip'])}
+                            variant={popupInfo['entry']['access'] === 'REVOKE' ? "outline-primary" : "outline-danger"}
+                            onClick={() => this.props.flipAccess(popupInfo['key'])}
                             >
-                            {popupInfo['access'] === 'REVOKE' ? "GRANT ACCESS 🔵" : "REVOKE ACCESS 🛑"}
+                            {popupInfo['entry']['access'] === 'REVOKE' ? "GRANT ACCESS 🔵" : "REVOKE ACCESS 🛑"}
                         </Button>
                     </div>
                 </Popup>
@@ -99,8 +97,8 @@ class Map extends Component {
                 >
 
                 {console.log(this.props.data)}
-                {Object.keys(this.props.data).map((key, index) =>
-                    this._renderCityMarker(this.props.data[key], key))}
+                {Object.keys(this.props.data).map((entry, key) =>
+                    this._renderCityMarker(this.props.data[entry], entry))}
 
                     {this._renderPopup()}
 
