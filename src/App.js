@@ -4,8 +4,9 @@ import './Map.css';
 import Log from './Log';
 import faker from 'faker';
 import FileSaver from 'file-saver';
+import history from './history';
 
-const ips = ['69.243.229.184', '96.150.51.147'];
+// const ips = ['69.243.229.184', '96.150.51.147'];
 
 
 class App extends Component {
@@ -13,9 +14,9 @@ class App extends Component {
         super(props);
 
         this.state = {
-            policies: {},
-            ip_addrs: this.updateGeos(ips),
-            updates: [],
+            policies: this.updateGeos(history.policies),
+            ip_addrs: history.ip_addrs,
+            updates: history.updates,
         };
     }
 
@@ -24,8 +25,7 @@ class App extends Component {
         let logUpdates = this.state.updates;
         const geo = this.ip2geo(entry.ip);
 
-        // eslint-disable-next-line
-        for(let field in geo) {
+        for(var field in geo) {
             console.log(field);
             entry[field] = geo[field];
         }
@@ -106,16 +106,15 @@ class App extends Component {
         return entry;
     }
 
-    updateGeos = (ips) => {
-        let geos = {};
-        for (var i in ips) {
-            const ip = ips[i];
-            const entry = this.ip2geo(ip);
-            geos[ip] = entry;
-            geos[ip]['access'] = 'GRANT';
-            geos[ip]['ip'] = ip;
+    updateGeos = (policies) => {
+        for(var key in policies) {
+            if('ip' in policies[key] && !('loc' in policies[key])) {
+                const ip = policies[key]['ip'];
+                const loc = this.ip2geo(ip);
+                policies[key]['loc'] = loc;
+            }
         }
-        return geos;
+        return policies;
     }
 
     render() {
