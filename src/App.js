@@ -11,9 +11,17 @@ class App extends Component {
     constructor(props) {
         super(props);
 
+        const email = process.env.REACT_APP_EMAIL;
+        if(!Virtru.Auth.isLoggedIn({email: email})) {
+            Virtru.Auth.loginWithGoogle({email: email, redirectUrl: "http://localhost:3000/"});
+        }
+        const client = new Virtru.Client({email});
+
+
         this.state = {
             policies: this.updatePolicies(history.policies),
             log: this.updateLog(history.log),
+            client: client
         };
     }
 
@@ -43,6 +51,10 @@ class App extends Component {
         const blob = new Blob([data], {type: 'application/json'});
         console.log(blob);
         FileSaver.saveAs(blob, 'history.json');
+    }
+
+    virtru = (access, policyId)  => {
+
     }
 
     flipAccess = (key) => {
@@ -140,7 +152,8 @@ class App extends Component {
                     addPolicy = {this.addPolicy}
                     writeFile = {this.writeFile}
                     ip2geo = {this.ip2geo}
-                    data = {this.state.policies}/>
+                    data = {this.state.policies}
+                    client = {this.state.client}/>
                 <Log data = {this.state.log} writeFile = {this.writeFile}/> </div>
             );
         }

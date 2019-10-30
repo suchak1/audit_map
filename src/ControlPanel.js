@@ -47,12 +47,7 @@ export default class ControlPanel extends PureComponent {
                                         const file = reader.result;
 
                                         const virtru = async () => {
-                                            const email = process.env.REACT_APP_EMAIL;
-                                            if(!Virtru.Auth.isLoggedIn({email: email})) {
-                                                Virtru.Auth.loginWithGoogle({email: email, redirectUrl: "http://localhost:3000/"});
-                                            }
                                             const policy = new Virtru.PolicyBuilder().build();
-                                            const client = new Virtru.Client({email});
                                             console.log(this.state.emails);
                                             const encryptParams = new Virtru.EncryptParamsBuilder()
                                             .withArrayBufferSource(file)
@@ -60,7 +55,7 @@ export default class ControlPanel extends PureComponent {
                                             .withPolicy(policy)
                                             .build();
 
-                                            const ct = await client.encrypt(encryptParams);
+                                            const ct = await this.props.client.encrypt(encryptParams);
                                             await ct.toFile('encrypted-' + fileName + '.html');
 
                                             const policyId = encryptParams.getPolicyId();
