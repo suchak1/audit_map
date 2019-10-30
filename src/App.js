@@ -54,19 +54,14 @@ class App extends Component {
     }
 
     flipVirtru = async(access, policyId)  => {
-        const policy = this.state.client.fetchPolicy(policyId);
+        console.log(policyId);
+        const policy = await this.state.client.fetchPolicy(policyId);
         const users = this.state.policies[policyId]['users'];
 
         const updatedPolicy = access === 'GRANT' ?
             policy.builder().addUsersWithAccess(users).build() :
-            policy.builder().removeUsersWithAccess(users);
-        // if(access === 'GRANT') {
-        //     policy.builder().addUsersWithAccess(users);
-        // } else {
-        //     policy.builder().removeUsersWithAccess(users);
-        // }
+            policy.builder().removeUsersWithAccess(users).build();
 
-        // await this.state.client.updatePolicy(policy.build())
         await this.state.client.updatePolicy(updatedPolicy);
         console.log("SUCCESS");
     }
@@ -75,7 +70,6 @@ class App extends Component {
         let copy = this.state.policies;
         let updates = this.state.log;
         const flip = copy[key]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
-        // use this flip val for virtru call
         copy[key]['access'] = flip;
 
         this.flipVirtru(flip, key);
