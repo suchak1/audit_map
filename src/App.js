@@ -47,7 +47,11 @@ class App extends Component {
     }
 
     writeFile = () => {
-        const data = JSON.stringify(this.state, null, 4);
+        const state = {};
+        state['policies'] = this.state.policies;
+        state['log'] = this.state.log;
+
+        const data = JSON.stringify(state, null, 4);
         const blob = new Blob([data], {type: 'application/json'});
         console.log(blob);
         FileSaver.saveAs(blob, 'history.json');
