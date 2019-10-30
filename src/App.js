@@ -53,15 +53,30 @@ class App extends Component {
         FileSaver.saveAs(blob, 'history.json');
     }
 
-    virtru = (access, policyId)  => {
+    virtru = async(access, policyId)  => {
+        const policy = this.state.client.fetchPolicy(policyId).builder();
+        const users = this.state.policies[policyId]['users'];
 
+        //const updatedPolicy = access === 'GRANT' ?
+        if(access === 'GRANT') {
+            policy.addUsersWithAccess(users);
+        } else {
+            policy.removeUsersWithAccess(users);
+        }
+
+        await this.state.client.updatePolicy(policy.build())
+        console.log("SUCCESS");
     }
 
     flipAccess = (key) => {
         let copy = this.state.policies;
         let updates = this.state.log;
         const flip = copy[key]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
+        // use this flip val for virtru call
         copy[key]['access'] = flip;
+
+        this.virtru(flip, key);
+
         updates.push({
             ip: copy[key]['ip'],
             access: flip,
