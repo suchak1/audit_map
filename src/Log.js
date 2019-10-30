@@ -45,7 +45,9 @@ class Log extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 LOCATION:&nbsp;
                 <span style={{color: "darkgray"}}>
-                    {this.padWord([this.props.data[index].loc.city, this.props.data[index].loc.country].join(', '), 50)}
+                    {!!this.props.data[index].loc ?
+                        this.padWord([this.props.data[index].loc.city, this.props.data[index].loc.country].join(', '), 50) :
+                    ""}
                 </span>
             </div>
         </div>

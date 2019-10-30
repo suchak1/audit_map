@@ -111,7 +111,11 @@ class Map extends Component {
                         <NavigationControl />
                     </div>
 
-                    <ControlPanel containerComponent={this.props.containerComponent} addPolicy={this.props.addPolicy} />
+                    <ControlPanel
+                        containerComponent={this.props.containerComponent}
+                        addPolicy={this.props.addPolicy}
+                        client={this.props.client}
+                        />
                 </MapGL>
             );
         }

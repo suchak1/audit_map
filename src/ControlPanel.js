@@ -19,6 +19,32 @@ export default class ControlPanel extends PureComponent {
         this.setState({emails: addresses});
     }
 
+    encrypt = async (file, fileName) => {
+        const policy = new Virtru.PolicyBuilder().build();
+        console.log(this.state.emails);
+        const encryptParams = new Virtru.EncryptParamsBuilder()
+        .withArrayBufferSource(file)
+        .withUsersWithAccess(this.state.emails)
+        .withPolicy(policy)
+        .build();
+
+        const ct = await this.props.client.encrypt(encryptParams);
+        await ct.toFile('encrypted-' + fileName + '.html');
+
+        const policyId = encryptParams.getPolicyId();
+        console.log(policyId);
+        const entry = {
+            [policyId]: {
+                users: this.state.emails,
+                file: fileName,
+                access: 'GRANT',
+                ip: await publicIp.v4()
+            }
+        };
+        console.log(entry);
+        this.props.addPolicy(policyId, entry[policyId]);
+
+    }
 
     render() {
         const Container = this.props.containerComponent || defaultContainer;
@@ -45,47 +71,10 @@ export default class ControlPanel extends PureComponent {
                                     const reader = new FileReader();
                                     reader.onload = () => {
                                         const file = reader.result;
-
-                                        const virtru = async () => {
-                                            const email = process.env.REACT_APP_EMAIL;
-                                            if(!Virtru.Auth.isLoggedIn({email: email})) {
-                                                Virtru.Auth.loginWithGoogle({email: email, redirectUrl: "http://localhost:3000/"});
-                                            }
-                                            const policy = new Virtru.PolicyBuilder().build();
-                                            const client = new Virtru.Client({email});
-                                            console.log(this.state.emails);
-                                            const encryptParams = new Virtru.EncryptParamsBuilder()
-                                            .withArrayBufferSource(file)
-                                            .withUsersWithAccess(this.state.emails)
-                                            .withPolicy(policy)
-                                            .build();
-
-                                            const ct = await client.encrypt(encryptParams);
-                                            await ct.toFile('encrypted-' + fileName + '.html');
-
-                                            const policyId = encryptParams.getPolicyId();
-                                            console.log(policyId);
-                                            const entry = {
-                                                [policyId]: {
-                                                    users: this.state.emails,
-                                                    file: fileName,
-                                                    access: 'GRANT',
-                                                    ip: await publicIp.v4()
-                                                }
-                                            };
-                                            console.log(entry);
-                                            this.props.addPolicy(policyId, entry[policyId]);
-
-                                        }
-                                        virtru();
+                                        this.encrypt(file, fileName);
                                     }
                                     let file = encryptRef.current.files[0];
                                     reader.readAsArrayBuffer(file);
-
-                                    // require user to store file in directory
-                                    // only record filename, pass filename to node.js file + e
-                                    // write json file after encrypting file - first level is encrypt paramas index then ip, users, filename, etc
-                                    // data structure in react app should be list of dicts encrypt params
                                 }
                             }}
                             />

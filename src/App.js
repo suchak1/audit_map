@@ -1,18 +1,27 @@
 import React, {Component} from 'react';
-import Map from './Map';
-import './Map.css';
-import Log from './Log';
+import Virtru from 'virtru-sdk';
 import FileSaver from 'file-saver';
 import history from './history';
+import Log from './Log';
+import Map from './Map';
+import './Map.css';
 
 
 class App extends Component {
     constructor(props) {
         super(props);
 
+        const email = process.env.REACT_APP_EMAIL;
+        if(!Virtru.Auth.isLoggedIn({email: email})) {
+            Virtru.Auth.loginWithGoogle({email: email, redirectUrl: "http://localhost:3000/"});
+        }
+        const client = new Virtru.Client({email});
+
+
         this.state = {
             policies: this.updatePolicies(history.policies),
             log: this.updateLog(history.log),
+            client: client
         };
     }
 
@@ -44,11 +53,27 @@ class App extends Component {
         FileSaver.saveAs(blob, 'history.json');
     }
 
+    flipVirtru = async(access, policyId)  => {
+        console.log(policyId);
+        const policy = await this.state.client.fetchPolicy(policyId);
+        const users = this.state.policies[policyId]['users'];
+
+        const updatedPolicy = access === 'GRANT' ?
+            policy.builder().addUsersWithAccess(users).build() :
+            policy.builder().removeUsersWithAccess(users).build();
+
+        await this.state.client.updatePolicy(updatedPolicy);
+        console.log("SUCCESS");
+    }
+
     flipAccess = (key) => {
         let copy = this.state.policies;
         let updates = this.state.log;
         const flip = copy[key]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
         copy[key]['access'] = flip;
+
+        this.flipVirtru(flip, key);
+
         updates.push({
             ip: copy[key]['ip'],
             access: flip,
@@ -139,7 +164,8 @@ class App extends Component {
                     addPolicy = {this.addPolicy}
                     writeFile = {this.writeFile}
                     ip2geo = {this.ip2geo}
-                    data = {this.state.policies}/>
+                    data = {this.state.policies}
+                    client = {this.state.client}/>
                 <Log data = {this.state.log} writeFile = {this.writeFile}/> </div>
             );
         }
