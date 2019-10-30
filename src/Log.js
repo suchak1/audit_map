@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {List, AutoSizer} from "react-virtualized";
+import { Button } from 'react-bootstrap';
+
 import './Log.css';
 
 const rowHeight = 30;
@@ -25,12 +27,12 @@ class Log extends Component {
         return (
             <div key={`row-${index}`} style={style}>
                 <div>
-                    ACTION:
+                    ACTION:&nbsp;
                     <span style={{color: accessColor}}>
                         {this.props.data[index].access.padEnd(9, ' ')}
                     </span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    USER(S):
+                    USER(S):&nbsp;
                     <span style={{color: "darkgray"}}>
                         {this.padWord('[' + this.props.data[index].email.join(', ') + ']', 75)}
                     </span>
@@ -41,9 +43,9 @@ class Log extends Component {
                     {this.padWord(this.props.data[index].file, 25)}
                 </span>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                LOCATION:
+                LOCATION:&nbsp;
                 <span style={{color: "darkgray"}}>
-                    {this.padWord('[' + this.props.data[index].email.join(', ') + ']', 75)}
+                    {this.padWord([this.props.data[index].loc.city, this.props.data[index].loc.country].join(', '), 50)}
                 </span>
             </div>
         </div>
@@ -68,17 +70,23 @@ binary = (str) => {
         return (
             <div className="log">
                 <div className="header">
-                    <b>{this.binary("A̩̯͔̞̙̮̰͗͋̎̒̓̚ͅu̖͖̝̟͎̦̦̞͈̤̐̑̆̈̆̂̀̊͒̄̃͒ͅd̳͍̮̖͌̅́̋ì̗̣̥̜̯̫̰̰͛͌̉͐̔̇́̊̈́͂́t͙̘̭̫͐̏̃͑͊̌̾̔̚ͅ M̫̟̮̣͉̭̗̳̲͉̌̌̑͋̽͋̀͗͐̾̚̚ͅà͙͎̲̲̈́̄́͑̂̆̄p͎͉̣̱̳̗͉̬̋̀͒̓̽̿̊ͅ > ")}</b>
-                    <span className="virtru">
-                        >
+                    <span>
+                        <b>{this.binary("A̩̯͔̞̙̮̰͗͋̎̒̓̚ͅu̖͖̝̟͎̦̦̞͈̤̐̑̆̈̆̂̀̊͒̄̃͒ͅd̳͍̮̖͌̅́̋ì̗̣̥̜̯̫̰̰͛͌̉͐̔̇́̊̈́͂́t͙̘̭̫͐̏̃͑͊̌̾̔̚ͅ M̫̟̮̣͉̭̗̳̲͉̌̌̑͋̽͋̀͗͐̾̚̚ͅà͙͎̲̲̈́̄́͑̂̆̄p͎͉̣̱̳̗͉̬̋̀͒̓̽̿̊ͅ >")}</b>
+                        <span className="virtru">
+                            >
+                        </span>
+                        <span style={{fontSize: "0.8em", color: "dimgray"}}>
+                            &nbsp;&nbsp;an entry for the Virtru Privacy Engineering Challenge
+                        </span>
                     </span>
-                    <span style={{fontSize: "0.8em", color: "dimgray"}}>
-                        &nbsp;&nbsp;an entry for the Virtru Privacy Engineering Challenge
+                    <span className="save">
+                        <Button variant = "primary" size = "sm" onClick = {this.props.writeFile}> Save JSON </Button>
                     </span>
                 </div>
                 <div className="underline">
                     {"Logs"}
                 </div>
+
                 <div className="list">
                     <AutoSizer>
                         {({height, width}) => (

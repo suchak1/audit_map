@@ -74,17 +74,23 @@ a {
 
 .header {
   padding-left: 10%;
+  padding-right: 2%;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-content: center;
   align-items: baseline;
 }
 
+.save {
+    font-family: 'Ubuntu Mono';
+}
 
 .underline {
   color: #4481F8;
   padding-left: 50%;
   position: relative;
-  text-align: center;
+  text-align: right;
   display: inline-block;
   font-family: 'Ubuntu Mono', Courier, serif;
   font-size: inherit;

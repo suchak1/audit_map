@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import Map from './Map';
 import './Map.css';
 import Log from './Log';
-import faker from 'faker';
-
-var ips = ['69.243.229.184', '96.150.51.147'];
+import FileSaver from 'file-saver';
+import history from './history';
 
 
 class App extends Component {
@@ -12,55 +11,55 @@ class App extends Component {
         super(props);
 
         this.state = {
-            policies: {},
-            ip_addrs: this.updateGeos(ips),
-            updates: [],
+            policies: this.updatePolicies(history.policies),
+            log: this.updateLog(history.log),
         };
     }
 
     addPolicy = (key, entry) => {
         let copy = this.state.policies;
-        let logUpdates = this.state.updates;
+        let updates = this.state.log;
         const geo = this.ip2geo(entry.ip);
 
-        // eslint-disable-next-line
-        for(let field in geo) {
-            console.log(field);
-            entry[field] = geo[field];
-        }
-
+        entry['loc'] = geo;
         copy[key] = entry;
-        logUpdates.push({
+        updates.push({
             ip: entry.ip,
             access: entry.access,
             email: entry.users,
             file: entry.file,
-            location: geo.city +', ' + geo.country,
-            key: logUpdates.length
+            key: key
         });
 
         this.setState(prevState => ({
             policies: copy,
-            updates: logUpdates
+            log: updates
         }));
-
     }
 
-    flipAccess = (ip) => {
-        let copy = this.state.ip_addrs;
-        let logUpdates = this.state.updates;
-        const flip = copy[ip]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
-        copy[ip]['access'] = flip;
-        logUpdates.push({
-            ip: ip,
+    writeFile = () => {
+        const data = JSON.stringify(this.state, null, 4);
+        const blob = new Blob([data], {type: 'application/json'});
+        console.log(blob);
+        FileSaver.saveAs(blob, 'history.json');
+    }
+
+    flipAccess = (key) => {
+        let copy = this.state.policies;
+        let updates = this.state.log;
+        const flip = copy[key]['access'] === 'GRANT' ? 'REVOKE' : 'GRANT';
+        copy[key]['access'] = flip;
+        updates.push({
+            ip: copy[key]['ip'],
             access: flip,
-            email: [faker.internet.email()],
-            file: faker.system.fileName(),
-            key: logUpdates.length
+            email: copy[key]['users'],
+            file: copy[key]['file'],
+            loc: copy[key]['loc'],
+            key: key
         });
         this.setState(prevState => ({
-            ip_addrs: copy,
-            updates: logUpdates
+            policies: copy,
+            updates: updates
         }))
     }
 
@@ -99,27 +98,49 @@ class App extends Component {
         return entry;
     }
 
-    updateGeos = (ips) => {
-        let geos = {};
-        for (var i in ips) {
-            const ip = ips[i];
-            const entry = this.ip2geo(ip);
-            geos[ip] = entry;
-            geos[ip]['access'] = 'GRANT';
-            geos[ip]['ip'] = ip;
+    updatePolicies = (policies) => {
+        for(var key in policies) {
+            if('ip' in policies[key] &&
+            !!policies[key]['ip'] &&
+            (!('loc' in policies[key]) || !policies[key]['loc']['lat'])) {
+                const ip = policies[key]['ip'];
+                const loc = this.ip2geo(ip);
+                policies[key]['loc'] = loc;
+            }
         }
-        return geos;
+        return policies;
+    }
+
+    updateLog = (log) => {
+        for(var idx in log) {
+            let entry = log[idx];
+            if('ip' in entry &&
+            !!entry['ip'] &&
+            !('loc' in entry)) {
+                const policies = history.policies;
+                if('loc' in policies[entry['key']] && !!policies[entry['key']]['loc']['lat']) {
+                    entry['loc'] = policies[entry['key']]['loc'];
+                } else {
+                    const ip = entry['ip'];
+                    const loc = this.ip2geo(ip);
+                    entry['loc'] = loc;
+                }
+                log[idx] = entry;
+            }
+        }
+        return log
     }
 
     render() {
-        console.log(this.state.ip_addrs);
+        console.log(this.state.policies);
         return (
             <div styles={{fontFamily: "Maven Pro"}}>
                 <Map flipAccess = {this.flipAccess}
                     addPolicy = {this.addPolicy}
+                    writeFile = {this.writeFile}
                     ip2geo = {this.ip2geo}
-                    data = {this.state.ip_addrs}/>
-                <Log data = {this.state.updates}/></div>
+                    data = {this.state.policies}/>
+                <Log data = {this.state.log} writeFile = {this.writeFile}/> </div>
             );
         }
     }

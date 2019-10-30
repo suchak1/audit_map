@@ -1,0 +1,68 @@
+{
+    "policies": {
+        "d69a27a1-87cb-4ffe-b2d2-48e602b8afb3": {
+            "users": [],
+            "file": "voters.csv",
+            "access": "GRANT",
+            "ip": "73.50.211.230",
+            "loc": {
+                "lat": 41.8196,
+                "long": -87.6126,
+                "city": "Chicago",
+                "region": "Illinois",
+                "region code": "IL",
+                "country": "United States",
+                "country code": "US"
+            }
+        },
+        "8963eb43-29b7-4b23-94fb-fdd1f5e97cbc": {
+            "users": [],
+            "file": "DataSciHW1.pdf",
+            "access": "GRANT",
+            "ip": "73.50.211.230",
+            "loc": {
+                "lat": 41.8196,
+                "long": -87.6126,
+                "city": "Chicago",
+                "region": "Illinois",
+                "region code": "IL",
+                "country": "United States",
+                "country code": "US"
+            }
+        }
+    },
+    "log": [
+        {
+            "ip": "73.50.211.230",
+            "access": "GRANT",
+            "email": [],
+            "file": "voters.csv",
+            "key": "d69a27a1-87cb-4ffe-b2d2-48e602b8afb3",
+            "loc": {
+                "lat": 41.8196,
+                "long": -87.6126,
+                "city": "Chicago",
+                "region": "Illinois",
+                "region code": "IL",
+                "country": "United States",
+                "country code": "US"
+            }
+        },
+        {
+            "ip": "73.50.211.230",
+            "access": "GRANT",
+            "email": [],
+            "file": "DataSciHW1.pdf",
+            "key": "8963eb43-29b7-4b23-94fb-fdd1f5e97cbc",
+            "loc": {
+                "lat": 41.8196,
+                "long": -87.6126,
+                "city": "Chicago",
+                "region": "Illinois",
+                "region code": "IL",
+                "country": "United States",
+                "country code": "US"
+            }
+        }
+    ]
+}
