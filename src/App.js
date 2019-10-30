@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import Map from './Map';
-import './Map.css';
-import Log from './Log';
+import Virtru from 'virtru-sdk';
 import FileSaver from 'file-saver';
 import history from './history';
+import Log from './Log';
+import Map from './Map';
+import './Map.css';
 
 
 class App extends Component {
