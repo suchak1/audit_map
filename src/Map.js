@@ -68,10 +68,26 @@ class Map extends Component {
                     onClose={() => this.setState({popupInfo: null})}
                     >
                     <div style={{paddingTop: 10, fontFamily: 'Maven Pro'}}>
-                        <div><b>File:</b> {popupInfo['entry']['file']}</div>
-                        <div><b>Users:</b> {popupInfo['entry']['users']}</div>
-                        <div><b>IP Address:</b> {popupInfo['entry']['ip']}</div>
-
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><b>File:</b></td>
+                                    <td>{popupInfo['entry']['file']}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Users:</b></td>
+                                    <td>{popupInfo['entry']['users']}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>IP Address:</b></td>
+                                    <td>{popupInfo['entry']['ip']}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Location:</b></td>
+                                    <td>{[popupInfo['entry']['loc']['city'], popupInfo['entry']['loc']['country']].join(', ')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Button

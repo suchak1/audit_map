@@ -52,7 +52,7 @@ npm start
 
 ## Result
 
-![Screenshot of Audit Map](pics/audit_map3.PNG)
+![Screenshot of Audit Map](pics/perf.PNG)
 
 ## Files
 
