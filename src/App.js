@@ -54,6 +54,7 @@ class App extends Component {
             access: flip,
             email: copy[key]['users'],
             file: copy[key]['file'],
+            loc: copy[key]['loc'],
             key: key
         });
         this.setState(prevState => ({
