@@ -2,7 +2,6 @@ virtru-tdf3-lib-python
 creds*
 __pycache__
 todo.txt
-.env
 
 # dependencies
 /node_modules
