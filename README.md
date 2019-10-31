@@ -15,33 +15,39 @@ Through the use of geolocation (specifically by mapping IP addresses that have a
 
 ### Prerequisites
 
-Obtain a free api key from [*mapbox*](https://www.mapbox.com/)
+Obtain a free API key from [*mapbox*](https://www.mapbox.com/)
 - This will enable mapping services.
 
-
-Obtain a [free api key](https://ipstack.com/product) from [*ipstack*](https://ipstack.com).
-- This will enable ip address to a geographic coordinate conversion (latitude / longitude).
-
-Obtain a free api key from [*virtru*](https://www.virtru.com/)
+Obtain a free API key from [*virtru*](https://www.virtru.com/)
 - This will enable encryption services and access to audit data.
 
-Paste your api keys in the [`.env`](.env) file as such:
+Obtain a [free API key](https://ipstack.com/product) from [*ipstack*](https://ipstack.com).
+- This will enable ip address to a geographic coordinate conversion (latitude / longitude).
+
+Paste the email address associated with your Virtru API key as well as your other API keys in the [`.env`](.env) file as such:
 
 ```
+REACT_APP_EMAIL=...
 REACT_APP_MAPBOX=...
-REACT_APP_IPSTACK=...
 REACT_APP_VIRTRU=...
+
+# Optional
+REACT_APP_IPSTACK=...
 ```
+
+***Note:*** The use of an ipstack API key is optional. For convenience, if an [*ipstack*](https://ipstack.com) API key is not provided, Audit Map will use [*ipapi*](https://ipapi.co)'s service without an API key.
 
 ### Installation
 **Linux**
 
 To install the necessary packages, simply run:
 ```
-npm ci
+npm i
 ```
 
-## Deployment
+
+
+## Local Deployment
 
 To use Audit Map, run:
 
@@ -49,6 +55,27 @@ To use Audit Map, run:
 npm start
 ```
 
+## Use
+
+Step 1: Write email addresses (separated by commas) with which you would like to share an encrypted file in the text box in the top right.
+
+Step 2: Click 'Encrypt File' and save the encrypted file to your computer.
+
+Step 3: Click 'Save JSON' and save the history of your actions.
+
+Step 4: Inject an IP Grabber into the encrypted file using injectionREPLACE THIS
+
+Step 5: Send the encrypted file by email or any other medium.
+
+...
+
+Step 6: After someone else has opened the encrypted file, check the IP Grabber tracking link and collect the most recent IP address.
+
+Step 7: Inject the new IP address into our history.json file using injectionREPLACETHIS
+
+Step 8: Check Audit Map again.
+
+The markers on the map should be updated with new geographical coordinates corresponding with the new IP address you injected. You can now choose to revoke or grant access (after revoking) to the file based on the results of this IP addressing mapping.
 
 ## Result
 
@@ -56,28 +83,22 @@ npm start
 
 ## Files
 
+- [```src/App.js```](src/App.js) - maintains state and acts as container for Map and Log components
+
+- [```src/Map.js```](src/Map.js) - displays markers for encrypted files on world map, allows for granting and revoking access to encrypted files
+
+- [```src/Log.js```](src/Log.js) - logs grant and revoke action history taken by user, allows saving of this history to maintain continuity between sessions
+
+- [```src/ControlPanel.js```](src/ControlPanel.js) - contains button to encrypt a file and text box to choose users with which to share the encrypted file
+
+- [```src/history.json```](src/history.json) - save file to store details for encrypted files
+
 - [```.env```](.env) - credentials file
+
+- [```packages.json```](package.json) - list of packages
 
 - [```.travis.yml```](.travis.yml) - build pipeline
 
-
-## TODO:
-- Virtru SDK Integration
-  - import file - handle file upload (Maven Pro font)
-  - collect email addresses to share to
-  - revoke / grant file - state change should trigger file policy change (revoke, grant access)
-  - BeautifulSoup ip grabber injection
-  - log should have fields for user, city, and filename - (perhaps time too)
-  - app state should record date/time, city, ip address, geolocation, filename, user
-  - use access json data
-  - add mock data
-- Add Credentials
-  - provide template for .env file
-  - add travis-ci encrypted keys
-- Surge Deployment
-
-- new functionality: (greyed out "REVOKED" after REVOKE and then GRANT on second open)
-- new functionality: loading button while sdk api calls are made
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md)
