@@ -71,6 +71,11 @@ class Map extends Component {
                         <table>
                             <tbody>
                                 <tr>
+                                    <td><b>policyId:</b></td>
+                                    <td>{popupInfo['key']}</td>
+                                </tr>
+                                <hr></hr>
+                                <tr>
                                     <td><b>File:</b></td>
                                     <td>{popupInfo['entry']['file']}</td>
                                 </tr>
