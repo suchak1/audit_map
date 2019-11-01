@@ -25,6 +25,7 @@ class App extends Component {
         };
     }
 
+
     addPolicy = (key, entry) => {
         let copy = this.state.policies;
         let updates = this.state.log;
@@ -41,9 +42,10 @@ class App extends Component {
         });
 
         this.setState(prevState => ({
-            policies: copy,
-            log: updates
+            policies: this.updatePolicies(copy),
+            log: this.updateLog(updates)
         }));
+
     }
 
     writeFile = () => {
@@ -99,7 +101,6 @@ class App extends Component {
             fetch('https://ipapi.co/' + ip + '/json/')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 entry['lat'] = data.latitude;
                 entry['long'] = data.longitude;
                 entry['city'] = data.city;

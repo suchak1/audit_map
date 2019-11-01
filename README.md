@@ -27,12 +27,12 @@ Obtain a [free API key](https://ipstack.com/product) from [*ipstack*](https://ip
 Paste the email address associated with your Virtru API key as well as your other API keys in the [`.env`](.env) file as such:
 
 ```
-REACT_APP_EMAIL=...
-REACT_APP_MAPBOX=...
-REACT_APP_VIRTRU=...
+    REACT_APP_EMAIL=...
+    REACT_APP_MAPBOX=...
+    REACT_APP_VIRTRU=...
 
-# Optional
-REACT_APP_IPSTACK=...
+    # Optional
+    REACT_APP_IPSTACK=...
 ```
 
 ***Note:*** The use of an ipstack API key is optional. For convenience, if an [*ipstack*](https://ipstack.com) API key is not provided, Audit Map will use [*ipapi*](https://ipapi.co)'s service without an API key.
@@ -42,7 +42,7 @@ REACT_APP_IPSTACK=...
 
 To install the necessary packages, simply run:
 ```
-npm i
+    npm i
 ```
 
 
@@ -52,28 +52,38 @@ npm i
 To use Audit Map, run:
 
 ```
-npm start
+    npm start
 ```
 
-## Use
+## Use Case
+Link to [Video Demo](https://youtu.be/nS0DRyZIU4w).
 
-Step 1: Write email addresses (separated by commas) with which you would like to share an encrypted file in the text box in the top right.
 
-Step 2: Click 'Encrypt File' and save the encrypted file to your computer.
+1. Write email addresses (separated by commas) with which you would like to share an encrypted file in the text box in the top right.
 
-Step 3: Click 'Save JSON' and save the history of your actions.
+2.  Click `Encrypt File` and save the encrypted file to your computer.
 
-Step 4: Inject an IP Grabber into the encrypted file using injectionREPLACE THIS
+3. Click `Save JSON` and save the history of your actions. Make sure this new `history.json` file replaces the one in `src/`.
 
-Step 5: Send the encrypted file by email or any other medium.
+4. Inject an IP Grabber into the encrypted file by executing the following command in the main directory, where `link` is the IP Grabber link and `path` is the path to the encrypted file to track (the one you created in Step 2). [Obtain a link here.](https://grabify.link/image) Use the link under `New URL` for the `link` parameter in the command. Keep the tracking link under `Access Link`. Revisiting the Access Link will provide you ip addresses to use for Step 7.
+
+    ```
+        node inject grabber link path
+    ```
+
+5. Send the encrypted file by email or any other medium.
 
 ...
 
-Step 6: After someone else has opened the encrypted file, check the IP Grabber tracking link and collect the most recent IP address.
+6. After someone else has opened the encrypted file, check the IP Grabber tracking link and collect the most recent IP address.
 
-Step 7: Inject the new IP address into our history.json file using injectionREPLACETHIS
+7. Inject the new IP address into our `history.json` file by executing the following command in the main directory, where `policyId`is a Virtru policy ID in `src/history.json` and `address` is the new ip address with which you would like to update the associated policy in `src/history.json`.
 
-Step 8: Check Audit Map again.
+    ```
+        node inject new_ip policyId address
+    ```
+
+8.  Check Audit Map again.
 
 The markers on the map should be updated with new geographical coordinates corresponding with the new IP address you injected. You can now choose to revoke or grant access (after revoking) to the file based on the results of this IP addressing mapping.
 
